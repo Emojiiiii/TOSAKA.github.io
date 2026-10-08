@@ -45,9 +45,10 @@
   <!-- main：页面的主要内容，区别于顶部导航和底部版权区。 -->
   <main>
     <!-- ========== 02 Hero：首页第一屏 ========== -->
-    <!--首页主视觉区域
-        hero：保留现有首页布局和样式
-        parallax-hero：标记需要添加视差滚动的区域
+      <!--
+        首页 Hero 区域
+        hero：原有布局
+        parallax-hero：全屏背景及视差滚动
       -->
       <section id="home" class="hero parallax-hero">
       <!-- 纯装饰元素：CSS 用 hero-glow 生成淡淡的金色背景光晕。 -->
@@ -248,67 +249,108 @@
     
   </footer>
 
-  <!-- =========================================
-       首页背景视差滚动
-       ========================================= -->
-  <script>
-    // 获取首页区域
-    const hero = document.querySelector(".parallax-hero");
 
-    // 检测用户是否希望减少动态效果
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+<!-- ==================================================
+     首页全屏高度 + 视差滚动控制
+     ================================================== -->
+<script>
+  // 获取首页和导航栏
+  const hero = document.querySelector(".parallax-hero");
+  const navbar = document.querySelector(".navbar");
+
+  // 检查是否需要减少动态效果
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  // 控制滚动事件更新频率
+  let ticking = false;
+
+  /*
+    自动计算导航栏高度
+
+    这样不需要手动猜测导航栏是多少像素。
+    当手机导航栏变成两行时，也能自动适配。
+  */
+  function updateNavbarHeight() {
+    if (!navbar) return;
+
+    const height = navbar.getBoundingClientRect().height;
+
+    document.documentElement.style.setProperty(
+      "--portfolio-nav-height",
+      `${height}px`
     );
+  }
 
-    // 控制动画帧，防止频繁更新影响性能
-    let isUpdating = false;
+  /*
+    更新视差背景位置
+  */
+  function updateParallax() {
+    if (!hero) return;
 
-    // 根据滚动位置调整背景偏移
-    function updateParallax() {
-      if (!hero) return;
-
-      // 手机端以及减少动态效果的设备禁用视差
-      if (window.innerWidth <= 768 || reducedMotion.matches) {
-        hero.style.setProperty("--parallax-offset", "0px");
-        return;
-      }
-
-      // 获取首页相对浏览器窗口的位置
-      const rect = hero.getBoundingClientRect();
-
-      // 滚动越多，背景产生的偏移越大
-      // 0.15 代表视差强度
-      // 最大偏移限制为 60px
-      const offset = Math.max(
-        0,
-        Math.min(60, -rect.top * 0.15)
-      );
-
-      // 将计算结果传给 CSS
+    // 手机端或系统减少动画时关闭视差
+    if (
+      window.innerWidth <= 768 ||
+      reducedMotion.matches
+    ) {
       hero.style.setProperty(
         "--parallax-offset",
-        `${offset}px`
+        "0px"
       );
+      return;
     }
 
-    // 用户滚动时更新
-    window.addEventListener("scroll", () => {
-      if (isUpdating) return;
+    // 获取首页相对于浏览器的当前位置
+    const rect = hero.getBoundingClientRect();
 
-      isUpdating = true;
+    /*
+      计算背景移动距离
 
-      requestAnimationFrame(() => {
-        updateParallax();
-        isUpdating = false;
-      });
-    }, { passive: true });
+      0.22：视差强度。
+      60：最大移动距离，单位 px。
 
-    // 浏览器窗口尺寸变化时重新计算
-    window.addEventListener("resize", updateParallax);
+      数值越大，背景移动越明显。
+    */
+    const offset = Math.max(
+      -60,
+      Math.min(60, -rect.top * 0.22)
+    );
 
-    // 页面加载后进行首次计算
+    // 更新 CSS 变量
+    hero.style.setProperty(
+      "--parallax-offset",
+      `${offset}px`
+    );
+  }
+
+  /*
+    页面滚动时更新背景
+  */
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      updateParallax();
+      ticking = false;
+    });
+  }, { passive: true });
+
+  /*
+    浏览器尺寸发生变化时：
+    重新计算导航栏高度和视差。
+  */
+  window.addEventListener("resize", () => {
+    updateNavbarHeight();
     updateParallax();
-  </script>
+  });
+
+  // 页面首次初始化
+  updateNavbarHeight();
+  updateParallax();
+</script>
 
 </body>
 </html>
