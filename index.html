@@ -45,7 +45,11 @@
   <!-- main：页面的主要内容，区别于顶部导航和底部版权区。 -->
   <main>
     <!-- ========== 02 Hero：首页第一屏 ========== -->
-    <section id="home" class="hero">
+    <!--首页主视觉区域
+        hero：保留现有首页布局和样式
+        parallax-hero：标记需要添加视差滚动的区域
+      -->
+      <section id="home" class="hero parallax-hero">
       <!-- 纯装饰元素：CSS 用 hero-glow 生成淡淡的金色背景光晕。 -->
       <div class="hero-glow"></div>
 
@@ -241,6 +245,72 @@
     <p>Email: lin.xinyuan@outlook.com</p>
     <p>GitHub: <a href="https://github.com/Emojiiiii" target="_blank">github.com/Emojiiiii</a></p>
     <p class="footer-note">© 2026 Emojiiiii. All rights reserved.</p>
+
+    
   </footer>
+
+  <!-- =========================================
+       首页背景视差滚动
+       ========================================= -->
+  <script>
+    // 获取首页区域
+    const hero = document.querySelector(".parallax-hero");
+
+    // 检测用户是否希望减少动态效果
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    // 控制动画帧，防止频繁更新影响性能
+    let isUpdating = false;
+
+    // 根据滚动位置调整背景偏移
+    function updateParallax() {
+      if (!hero) return;
+
+      // 手机端以及减少动态效果的设备禁用视差
+      if (window.innerWidth <= 768 || reducedMotion.matches) {
+        hero.style.setProperty("--parallax-offset", "0px");
+        return;
+      }
+
+      // 获取首页相对浏览器窗口的位置
+      const rect = hero.getBoundingClientRect();
+
+      // 滚动越多，背景产生的偏移越大
+      // 0.15 代表视差强度
+      // 最大偏移限制为 60px
+      const offset = Math.max(
+        0,
+        Math.min(60, -rect.top * 0.15)
+      );
+
+      // 将计算结果传给 CSS
+      hero.style.setProperty(
+        "--parallax-offset",
+        `${offset}px`
+      );
+    }
+
+    // 用户滚动时更新
+    window.addEventListener("scroll", () => {
+      if (isUpdating) return;
+
+      isUpdating = true;
+
+      requestAnimationFrame(() => {
+        updateParallax();
+        isUpdating = false;
+      });
+    }, { passive: true });
+
+    // 浏览器窗口尺寸变化时重新计算
+    window.addEventListener("resize", updateParallax);
+
+    // 页面加载后进行首次计算
+    updateParallax();
+  </script>
+
 </body>
 </html>
+
