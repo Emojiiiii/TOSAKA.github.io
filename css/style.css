@@ -21,12 +21,36 @@
 html {
   scroll-behavior: smooth; /* 点击 #about 等站内锚点时平滑滚动 */
 }
+
 body {
-  font-family: Arial, Helvetica, sans-serif; /* 字体回退顺序 */
-  background-color: #101114; /* 整站深灰背景 */
-  color: #EAECEF;          /* 默认浅色文字 */
-  line-height: 1.6;       /* 普通段落行高，增加可读性 */
+  /* 网站默认字体 */
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* 背景图片加载失败时显示的备用颜色 */
+  background-color: #0d0f14;
+
+  /* 设置网站背景图片 */
+background-image: url("../images/test_1.jpg");
+
+/* 背景图片居中 */
+background-position: center;
+
+/* 背景图片自动覆盖整个区域 */
+background-size: cover;
+
+/* 防止背景图片重复 */
+background-repeat: no-repeat;
+
+  /* 页面内容较少时，背景至少覆盖整个屏幕 */
+  min-height: 100vh;
+
+  /* 默认文字颜色 */
+  color: #f5f7fa;
+
+  /* 文字行高 */
+  line-height: 1.6;
 }
+
 a {
   color: inherit;          /* 链接沿用父元素字体颜色 */
   text-decoration: none;   /* 去掉默认下划线 */
