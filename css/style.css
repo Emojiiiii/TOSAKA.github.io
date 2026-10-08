@@ -428,33 +428,160 @@ a {
 }
 
 
-/* =========================================
-   首页背景视差滚动
-   ========================================= */
+/* ==================================================
+   12. 全屏首页 + 视差背景（Parallax Hero）
+   ================================================== */
 
 /*
-  CSS 变量用于接收 JavaScript 计算的滚动偏移。
-  保留原有背景图片、尺寸和页面布局设置。
+  首页高度设置
+
+  100svh：
+    浏览器可视区域的高度。
+    比传统 100vh 更适合移动端浏览器。
+
+  --portfolio-nav-height：
+    由 JavaScript 自动读取导航栏实际高度。
+
+  最终效果：
+    导航栏高度 + 首页高度 = 至少一整屏。
+    无论横屏或竖屏，都不会提前露出下方章节。
 */
-.parallax-hero {
+.hero.parallax-hero {
+  min-height: calc(
+    100svh - var(--portfolio-nav-height, 76px)
+  );
+
+  /* 保留原有 Flex 布局 */
+  display: flex;
+  align-items: center;
+
+  /* 作为背景图层的定位参照 */
+  position: relative;
+
+  /* 隐藏超出首页区域的背景 */
+  overflow: hidden;
+
+  /* 移除原来直接放在 Hero 上的背景图片 */
+  background-image: none;
+
+  /* 背景移动距离，由 JS 控制 */
   --parallax-offset: 0px;
-
-  /* 通过改变背景位置产生视差 */
-  background-position:
-    center calc(50% + var(--parallax-offset));
 }
 
-/* 移动端关闭视差 */
+/* ==================================================
+   独立的视差背景图层
+   ================================================== */
+
+.hero.parallax-hero::after {
+  content: "";
+
+  /* 绝对定位，不影响文字和按钮布局 */
+  position: absolute;
+
+  /*
+    背景向四周额外延伸 90px。
+    滚动时背景有足够的移动空间，
+    避免露出空白边缘。
+  */
+  inset: -90px;
+
+  /* 背景位于文字下方 */
+  z-index: 0;
+
+  /* 默认横屏背景 */
+  background-image: url("../images/test_1.jpg");
+
+  /* 图片填满整个背景图层 */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /*
+    通过 transform 移动背景图层。
+    与直接修改 background-position 相比，
+    更容易产生明显的视差效果。
+  */
+  transform: translate3d(
+    0,
+    var(--parallax-offset),
+    0
+  );
+
+  /* 提示浏览器对 transform 进行优化 */
+  will-change: transform;
+
+  /* 背景层不拦截鼠标点击 */
+  pointer-events: none;
+}
+
+/* ==================================================
+   背景自动切换：横屏 / 竖屏
+   ================================================== */
+
+/* 横屏：使用宽幅图片 */
+@media (orientation: landscape) {
+  .hero.parallax-hero::after {
+    background-image: url("../images/test_1.jpg");
+  }
+}
+
+/* 竖屏：使用竖幅图片 */
+@media (orientation: portrait) {
+  .hero.parallax-hero::after {
+    background-image: url("../images/test_2.jpg");
+  }
+}
+
+/* ==================================================
+   保证文字与装饰层显示在背景上方
+   ================================================== */
+
+/* 原有金色光晕 */
+.hero.parallax-hero .hero-glow {
+  z-index: 1;
+}
+
+/* 原有科技网格 */
+.hero.parallax-hero::before {
+  z-index: 1;
+}
+
+/* 标题、简介、按钮等 */
+.hero.parallax-hero .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==================================================
+   移动端优化
+   ================================================== */
 @media (max-width: 768px) {
-  .parallax-hero {
-    background-position: center center;
+  .hero.parallax-hero {
+    /*
+      覆盖旧的 80vh 最小高度设置。
+      保证手机首屏也完整填充。
+    */
+    min-height: calc(
+      100svh - var(--portfolio-nav-height, 76px)
+    );
+  }
+
+  .hero.parallax-hero::after {
+    /* 移动端不需要额外的视差移动空间 */
+    inset: 0;
+
+    /* 关闭背景位移 */
+    transform: none;
+    will-change: auto;
   }
 }
 
-/* 系统要求减少动画时关闭视差 */
+/* ==================================================
+   无障碍：减少动态效果
+   ================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .parallax-hero {
-    background-position: center center;
+  .hero.parallax-hero::after {
+    transform: none;
+    will-change: auto;
   }
 }
-
