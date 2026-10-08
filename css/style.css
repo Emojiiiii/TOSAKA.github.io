@@ -673,3 +673,78 @@ main > section {
     scroll-snap-type: none;
   }
 }
+
+
+/* ==================================================
+   14. Portfolio + Strengths 合并页面
+   ================================================== */
+
+/*
+  合并页面使用纵向 Flex 布局。
+  两个模块共同占据一屏。
+*/
+.combined-page {
+  display: flex;
+  flex-direction: column;
+
+  /* 页面内容尽量垂直居中 */
+  justify-content: center;
+
+  /* 作品和优势之间的间距 */
+  gap: clamp(20px, 3vh, 36px);
+
+  /* 根据屏幕高度自动缩放上下留白 */
+  padding: clamp(28px, 4vh, 55px) 8%;
+}
+
+/* 去掉原来 Strengths 独立章节的大内边距 */
+.combined-page .focus-inline {
+  padding: 0;
+
+  /* 让两部分视觉风格更统一 */
+  background: transparent;
+}
+
+/* 缩小两个模块标题下方的间距 */
+.combined-page .section-header {
+  margin-bottom: 16px;
+}
+
+/* 适当压缩作品卡片高度 */
+.combined-page .card-image {
+  height: clamp(110px, 14vh, 190px);
+}
+
+/* 缩小作品卡片和优势卡片之间的空隙 */
+.combined-page .card-grid,
+.combined-page .focus-grid {
+  gap: 14px;
+}
+
+/* 缩小优势卡片内部留白 */
+.combined-page .focus-item {
+  padding: 16px;
+}
+
+/*
+  Strengths 已经是第二屏内部模块，
+  不再单独成为滚动吸附目标。
+*/
+#focus {
+  scroll-snap-align: none;
+}
+
+/*
+  手机端允许内容自然变高，
+  避免作品与优势被强行挤在一个屏幕里。
+*/
+@media (max-width: 768px) {
+  .combined-page {
+    justify-content: flex-start;
+    padding: 48px 7%;
+  }
+
+  .combined-page .card-image {
+    height: 170px;
+  }
+}
