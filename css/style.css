@@ -273,3 +273,71 @@ a {
     font-size: 1rem;
   }
 }
+
+/* Portfolio Visual Upgrade - Phase 1 */
+
+body {
+  background-color: #101114;
+  color: #EAECEF;
+}
+
+.navbar {
+  padding: 22px 8%;
+  background: rgba(16, 17, 20, 0.96);
+  border-bottom: 1px solid #292C32;
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #EAECEF;
+}
+
+.logo-dot {
+  color: #D6A36B;
+}
+
+.nav-links {
+  gap: 36px;
+}
+
+.nav-links a {
+  color: #AEB5BE;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+}
+
+.nav-links a:hover {
+  color: #D6A36B;
+}
+
+.nav-links .nav-contact {
+  color: #D6A36B;
+}
+
+.tag,
+.section-tag {
+  color: #D6A36B;
+}
+
+.btn-primary {
+  background: #D6A36B;
+}
+
+.focus-item h3,
+.footer a {
+  color: #D6A36B;
+}
+
+.card:hover {
+  border-color: #D6A36B;
+}
+
+@media (max-width: 600px) {
+  .nav-links {
+    gap: 16px;
+  }
+}
