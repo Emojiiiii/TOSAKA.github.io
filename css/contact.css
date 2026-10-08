@@ -1,1 +1,146 @@
 
+/* ==========================================
+   contact.css — 联系方式弹窗样式
+   ========================================== */
+
+/* 弹窗关闭时完全隐藏 */
+.contact-modal[hidden] {
+  display: none;
+}
+
+/* 覆盖整个浏览器窗口 */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+}
+
+/* 背景遮罩 */
+.contact-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+/* 联系方式内容面板 */
+.contact-panel {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+
+  padding: clamp(24px, 5vw, 48px);
+
+  background: #171c25;
+  border: 1px solid #343b48;
+  border-radius: 8px;
+
+  color: #eaecef;
+
+  animation: contactAppear 0.45s ease both;
+}
+
+/* 标题行 */
+.contact-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 36px;
+}
+
+/* 金色标签 */
+.contact-label {
+  color: #d6a36b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* 关闭按钮 */
+.contact-close {
+  border: none;
+  background: transparent;
+  color: #eaecef;
+
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* 标题 */
+.contact-panel h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 20px;
+}
+
+/* 介绍文字 */
+.contact-description {
+  color: #aeb5be;
+  line-height: 1.9;
+  margin-bottom: 35px;
+}
+
+/* 联系方式链接 */
+.contact-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 20px 0;
+  border-top: 1px solid #343b48;
+}
+
+/* 联系方式类型 */
+.contact-link span {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: #d6a36b;
+}
+
+/* 联系方式内容 */
+.contact-link strong {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  overflow-wrap: anywhere;
+}
+
+/* 鼠标悬停效果 */
+.contact-link:hover strong {
+  color: #d6a36b;
+}
+
+/* 打开弹窗时锁定背景滚动 */
+body.contact-open {
+  overflow: hidden;
+}
+
+/* 弹窗出现动画 */
+@keyframes contactAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 减少动画效果 */
+@media (prefers-reduced-motion: reduce) {
+  .contact-panel {
+    animation: none;
+  }
+}
+
