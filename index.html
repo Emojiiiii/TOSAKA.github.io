@@ -360,6 +360,177 @@
   updateParallax();
 </script>
 
+
+<!-- ==================================================
+     全屏翻页动画控制器
+     鼠标每次滚动切换一个主要章节
+     ================================================== -->
+<script>
+  // 每次翻页持续 1200 毫秒，即 1.2 秒
+  const PAGE_DURATION = 1200;
+
+  // 获取实际的页面章节
+  const pages = [
+    document.querySelector("#home"),
+    document.querySelector("#projects"),
+    document.querySelector("#about"),
+    document.querySelector("#contact")
+  ].filter(Boolean);
+
+  // 防止动画进行时重复触发翻页
+  let pageAnimating = false;
+
+  // 使用缓入缓出的动画曲线
+  function easeInOutCubic(t) {
+    return t < 0.5
+      ? 4 * t * t * t
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  // 获取某章节对应的页面滚动位置
+  function getPageTop(element) {
+    const navHeight = navbar
+      ? navbar.getBoundingClientRect().height
+      : 0;
+
+    const top =
+      element.getBoundingClientRect().top +
+      window.scrollY;
+
+    // 首页从 0 开始，其余页面避开导航栏
+    const target = element.id === "home"
+      ? 0
+      : top - navHeight;
+
+    // 防止滚动超过文档底部
+    const maximum =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    return Math.max(0, Math.min(target, maximum));
+  }
+
+  // 执行精确时长的平滑滚动动画
+  function animatePageScroll(target) {
+    const startingY = window.scrollY;
+    const distance = target - startingY;
+
+    if (Math.abs(distance) < 2) return;
+
+    pageAnimating = true;
+
+    let startTime = null;
+
+    function animate(timestamp) {
+      if (startTime === null) startTime = timestamp;
+
+      const elapsed = timestamp - startTime;
+
+      // 当前动画进度：0 到 1
+      const progress = Math.min(
+        elapsed / PAGE_DURATION,
+        1
+      );
+
+      // 应用缓入缓出曲线
+      const eased = easeInOutCubic(progress);
+
+      // 移动页面；原有视差脚本会同步响应
+      window.scrollTo(
+        0,
+        startingY + distance * eased
+      );
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        pageAnimating = false;
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  // 监听鼠标滚轮
+  window.addEventListener("wheel", function(event) {
+
+    // 手机、小屏设备和减少动画模式使用原生滚动
+    if (
+      window.innerWidth <= 768 ||
+      reducedMotion.matches ||
+      event.ctrlKey
+    ) return;
+
+    // 动画进行期间阻止重复滚动
+    if (pageAnimating) {
+      event.preventDefault();
+      return;
+    }
+
+    // 忽略水平滚动和极小滚动
+    if (
+      Math.abs(event.deltaY) <=
+      Math.abs(event.deltaX) ||
+      Math.abs(event.deltaY) < 2
+    ) return;
+
+    const movingDown = event.deltaY > 0;
+    const currentY = window.scrollY;
+
+    // 获取各章节的起始位置
+    const positions = pages.map(getPageTop);
+
+    // 找到当前所在章节
+    let currentIndex = 0;
+
+    for (let i = 0; i < positions.length; i++) {
+      if (currentY >= positions[i] - 5) {
+        currentIndex = i;
+      }
+    }
+
+    // 下滚：如果当前章节还没有读完，则自然滚动
+    if (movingDown) {
+      const nextIndex = currentIndex + 1;
+
+      if (nextIndex >= pages.length) return;
+
+      /*
+        如果当前章节内容超过一屏，
+        先允许用户正常往下阅读。
+
+        仅在接近章节底部时启动翻页。
+      */
+      const readableBottom =
+        positions[nextIndex] - window.innerHeight;
+
+      if (currentY < readableBottom - 5) {
+        return;
+      }
+
+      event.preventDefault();
+      animatePageScroll(positions[nextIndex]);
+    }
+
+    // 上滚：回到当前章节顶部，再翻到上一章节
+    else {
+      if (currentY > positions[currentIndex] + 5) {
+        return;
+      }
+
+      if (currentIndex <= 0) return;
+
+      event.preventDefault();
+
+      animatePageScroll(
+        positions[currentIndex - 1]
+      );
+    }
+
+  }, { passive: false });
+</script>
+
+
 </body>
 </html>
 
