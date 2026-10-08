@@ -94,7 +94,13 @@
          section-header：标题区；card-grid：卡片布局容器。
          article.card：单个独立作品条目，三张卡目前都是占位内容。
     -->
-    <section id="projects" class="section">
+    <!--
+      第二屏：主要作品 + 个人优势
+    
+      combined-page：
+      两个内容模块共用一屏，减少空白。
+    -->
+    <section id="projects" class="section combined-page">
       <div class="section-header">
         <p class="section-tag">Portfolio</p><!-- 标题上方的小字 -->
         <h2>主要作品</h2><!-- 区块正式标题 -->
@@ -134,13 +140,16 @@
           </div>
         </article>
       </div>
-    </section>
-
+      
     <!-- ========== 04 Design Focus：能力/设计重点 ==========
          section-dark：这个区块采用稍有区别的背景色。
          focus-grid：桌面上两列排版，手机上改为一列。
     -->
-    <section id="focus" class="section section-dark">
+    <!--
+      优势模块现在位于 Portfolio 内部。
+      仍然保留 id="focus"，方便以后定位。
+    -->
+    <div id="focus" class="section section-dark focus-inline">
       <div class="section-header">
         <p class="section-tag">Strengths</p>
         <h2>我的优势</h2>
@@ -163,12 +172,11 @@
           <h3>游戏经历</h3>
           <p>结合自身游戏经验，理解玩家偏好、外观吸引力、游戏内辨识度和用户体验。</p>
         </div>
-      </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ========== 05 About：个人介绍 ==========
-         当前文字仍特别提到 CODM；之后可以改成更通用的职业定位。
-    -->
+  <!-- 结束 Portfolio + Strengths 合并页面 -->
+</section>
     
 <!-- ========== 05 About：个人介绍 ========== -->
 <section id="about" class="section">
