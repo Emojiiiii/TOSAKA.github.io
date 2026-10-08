@@ -426,3 +426,35 @@ a {
     background-position: center center;
   }
 }
+
+
+/* =========================================
+   首页背景视差滚动
+   ========================================= */
+
+/*
+  CSS 变量用于接收 JavaScript 计算的滚动偏移。
+  保留原有背景图片、尺寸和页面布局设置。
+*/
+.parallax-hero {
+  --parallax-offset: 0px;
+
+  /* 通过改变背景位置产生视差 */
+  background-position:
+    center calc(50% + var(--parallax-offset));
+}
+
+/* 移动端关闭视差 */
+@media (max-width: 768px) {
+  .parallax-hero {
+    background-position: center center;
+  }
+}
+
+/* 系统要求减少动画时关闭视差 */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-hero {
+    background-position: center center;
+  }
+}
+
