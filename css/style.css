@@ -400,3 +400,29 @@ a {
     letter-spacing: 0.5px;
   }
 }
+
+/* ==================================================
+   11. 根据屏幕方向切换首页背景图片
+   ================================================== */
+
+/* 横屏模式：屏幕宽度大于高度 */
+@media (orientation: landscape) {
+  .hero {
+    /* 横屏背景图片 */
+    background-image: url("../images/test_1.jpg");
+
+    /* 图片居中 */
+    background-position: center center;
+  }
+}
+
+/* 竖屏模式：屏幕高度大于宽度 */
+@media (orientation: portrait) {
+  .hero {
+    /* 竖屏背景图片 */
+    background-image: url("../images/test_2.jpg");
+
+    /* 图片居中 */
+    background-position: center center;
+  }
+}
