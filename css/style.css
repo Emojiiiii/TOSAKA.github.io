@@ -341,3 +341,168 @@ body {
     gap: 16px;
   }
 }
+
+/* ========================================
+   HERO SECTION - PORTFOLIO V2
+======================================== */
+
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 110px 8% 50px;
+  background: #101114;
+}
+
+/* Subtle background glow */
+.hero-glow {
+  position: absolute;
+  top: 5%;
+  right: -15%;
+  width: 65%;
+  height: 90%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(214, 163, 107, 0.10) 0%,
+    rgba(214, 163, 107, 0.025) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Subtle technical grid */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px
+    );
+  background-size: 64px 64px;
+  mask-image: linear-gradient(
+    to right,
+    transparent 5%,
+    black 100%
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 950px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+  color: #D6A36B;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 2px;
+  background: #D6A36B;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -2.5px;
+  margin-bottom: 32px;
+  color: #F2F3F5;
+}
+
+.hero-accent {
+  color: #D6A36B;
+}
+
+.hero-text {
+  max-width: 640px;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: #A9B0BA;
+  margin-bottom: 42px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+  padding: 15px 26px;
+  border-radius: 3px;
+  font-size: 0.78rem;
+  letter-spacing: 1.4px;
+}
+
+.hero-buttons .btn-primary {
+  background: #D6A36B;
+  color: #101114;
+}
+
+.hero-buttons .btn-secondary {
+  background: transparent;
+  border: 1px solid #565B65;
+  color: #EAECEF;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 100px;
+  padding-top: 22px;
+  border-top: 1px solid #30343A;
+  color: #858E9A;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+/* Mobile adaptation */
+@media (max-width: 600px) {
+  .hero {
+    min-height: 80vh;
+    padding: 90px 7% 35px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    letter-spacing: -1.5px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  .hero-bottom {
+    margin-top: 65px;
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+  }
+}
