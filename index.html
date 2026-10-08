@@ -1,20 +1,43 @@
 <!DOCTYPE html>
+<!--
+  ==================== 网站首页 index.html ====================
+  HTML 负责“网页内容和结构”，CSS 负责“颜色、排版和视觉效果”。
+  修改文字/增减板块时，优先编辑本文件。
+  本文件保留当前网站的各个内容区域，额外增加详细中文注释。
+  注意：注释不会显示在正常网页里。
+-->
 <html lang="en">
 <head>
+  <!-- UTF-8：支持中英文及特殊符号，避免乱码。 -->
   <meta charset="UTF-8" />
+  <!-- viewport：让手机浏览器使用真实设备宽度，配合 CSS 做移动端适配。 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 网页标签页名称；当前仍含 CODM，以后可按广泛求职定位修改。 -->
   <title>Emojiiiii | CODM Skin Design Portfolio</title>
+  <!--
+    加载 CSS 样式文件：css 是文件夹，style.css 是里面的文件。
+    相对路径适用于现在这种“仓库子路径”的 GitHub Pages 项目网站。
+    若网站显示成白底、蓝色链接，先确认此路径与线上文件位置对应。
+  -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- ========== 01 顶部导航栏（Navigation）==========
+       navbar：控制整个导航区域的背景、间距和固定位置。
+       logo：左侧个人品牌。nav-links：右侧的导航选项。
+       每个 href="#名称" 对应下方某个 section 的 id。
+  -->
   <header class="navbar">
+    <!-- YOUR NAME 是待替换姓名；末尾金色句点由 CSS 的 logo-dot 设置。 -->
     <a href="#home" class="logo">
-      XINYUAN LIN<span class="logo-dot">.</span>
+      YOUR NAME<span class="logo-dot">.</span>
     </a>
-  
+
+    <!-- aria-label 让读屏工具知道这是主导航区。 -->
     <nav aria-label="Main navigation">
       <ul class="nav-links">
         <li><a href="#projects">WORK</a></li>
+        <!-- 当前网页暂无 id="journal" 区域；此链接暂时无法定位到内容。 -->
         <li><a href="#journal">JOURNAL</a></li>
         <li><a href="#about">ABOUT</a></li>
         <li><a href="#contact" class="nav-contact">CONTACT ↗</a></li>
@@ -22,23 +45,28 @@
     </nav>
   </header>
 
-
+  <!-- main：页面的主要内容，区别于顶部导航和底部版权区。 -->
   <main>
+    <!-- ========== 02 Hero：首页第一屏 ========== -->
     <section id="home" class="hero">
+      <!-- 纯装饰元素：CSS 用 hero-glow 生成淡淡的金色背景光晕。 -->
       <div class="hero-glow"></div>
-    
+
+      <!-- hero-content：将标题、简介、按钮限制在合适宽度内。 -->
       <div class="hero-content">
-    
+        <!-- eyebrow：位于主标题上面的职业方向小标签。 -->
         <div class="hero-eyebrow">
-          <span class="eyebrow-line"></span>
+          <span class="eyebrow-line"></span><!-- 左侧的短金色横线 -->
           <span>GAME COSMETIC DESIGN / CREATIVE PLANNING</span>
         </div>
-    
+
+        <!-- h1：整页最重要的标题；br 表示主动换行。 -->
         <h1>
           Designing Skins.<br>
           <span class="hero-accent">Building Identity.</span>
         </h1>
-    
+
+        <!-- 首屏个人介绍：以后可以替换成自己的真实设计经历。 -->
         <p class="hero-text">
           Exploring the intersection of visual storytelling,
           player experience, and cosmetic design in games.
@@ -46,34 +74,37 @@
           I develop concepts that connect aesthetics
           with meaningful player experiences.
         </p>
-    
+
+        <!-- 两个按钮会跳转到本页面的作品区和 About 区。 -->
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary">
             EXPLORE WORK <span aria-hidden="true">↗</span>
           </a>
-    
-          <a href="#about" class="btn btn-secondary">
-            关于我
-          </a>
+          <a href="#about" class="btn btn-secondary">ABOUT ME</a>
         </div>
-    
+
+        <!-- 首屏底部标识/滚动提示：目前只显示文本，并非点击按钮。 -->
         <div class="hero-bottom">
           <span>INDEPENDENT DESIGN PORTFOLIO</span>
           <span>SCROLL TO EXPLORE ↓</span>
         </div>
-    
       </div>
     </section>
 
+    <!-- ========== 03 Featured Projects：精选作品 ==========
+         section-header：标题区；card-grid：卡片布局容器。
+         article.card：单个独立作品条目，三张卡目前都是占位内容。
+    -->
     <section id="projects" class="section">
       <div class="section-header">
-        <p class="section-tag">Portfolio</p>
-        <h2>Featured Projects</h2>
+        <p class="section-tag">Portfolio</p><!-- 标题上方的小字 -->
+        <h2>Featured Projects</h2><!-- 区块正式标题 -->
       </div>
 
       <div class="card-grid">
+        <!-- 作品卡片 01：武器皮肤；换真实项目时修改标题和简介。 -->
         <article class="card">
-          <div class="card-image placeholder">Project 01</div>
+          <div class="card-image placeholder">Project 01</div><!-- 未来可替换成 img 元素 -->
           <div class="card-body">
             <h3>Weapon Skin Concept</h3>
             <p>
@@ -83,6 +114,7 @@
           </div>
         </article>
 
+        <!-- 作品卡片 02：角色外观。 -->
         <article class="card">
           <div class="card-image placeholder">Project 02</div>
           <div class="card-body">
@@ -94,6 +126,7 @@
           </div>
         </article>
 
+        <!-- 作品卡片 03：系列皮肤策划。 -->
         <article class="card">
           <div class="card-image placeholder">Project 03</div>
           <div class="card-body">
@@ -107,6 +140,10 @@
       </div>
     </section>
 
+    <!-- ========== 04 Design Focus：能力/设计重点 ==========
+         section-dark：这个区块采用稍有区别的背景色。
+         focus-grid：桌面上两列排版，手机上改为一列。
+    -->
     <section id="focus" class="section section-dark">
       <div class="section-header">
         <p class="section-tag">Strengths</p>
@@ -133,6 +170,9 @@
       </div>
     </section>
 
+    <!-- ========== 05 About：个人介绍 ==========
+         当前文字仍特别提到 CODM；之后可以改成更通用的职业定位。
+    -->
     <section id="about" class="section">
       <div class="section-header">
         <p class="section-tag">About</p>
@@ -153,6 +193,9 @@
     </section>
   </main>
 
+  <!-- ========== 06 Footer：联系信息和版权 ==========
+       重要：your-email@example.com 是占位邮箱，实际求职前务必替换。
+  -->
   <footer id="contact" class="footer">
     <h2>Contact</h2>
     <p>Email: your-email@example.com</p>

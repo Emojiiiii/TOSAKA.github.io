@@ -1,438 +1,146 @@
+/* ==============================================================
+   网站样式表 style.css — 中文详细注释版
+   ============================================================== 
+   HTML 决定内容；CSS 决定布局、颜色、字体、动画。
+   本文件将之前多次追加的覆盖规则整理成最终有效的样式。
+   CSS 常见单位：
+     px  = 像素；rem = 基于根元素字体大小；vh = 浏览器视口高度百分比；
+     %   = 相对于父元素/可用空间；vw = 浏览器视口宽度百分比。
+   常用颜色：
+     #101114  主背景深灰
+     #D6A36B  品牌暖金色
+     #EAECEF  主要文字浅白
+   ============================================================= */
+
+/* ---------- 01 全局基础样式 ---------- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;              /* 去掉浏览器给各标签的默认外边距 */
+  padding: 0;             /* 去掉默认内边距 */
+  box-sizing: border-box; /* 宽度包含 padding 和 border，方便计算 */
 }
-
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* 点击 #about 等站内锚点时平滑滚动 */
 }
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #0d0f14;
-  color: #f5f7fa;
-  line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif; /* 字体回退顺序 */
+  background-color: #101114; /* 整站深灰背景 */
+  color: #EAECEF;          /* 默认浅色文字 */
+  line-height: 1.6;       /* 普通段落行高，增加可读性 */
 }
-
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit;          /* 链接沿用父元素字体颜色 */
+  text-decoration: none;   /* 去掉默认下划线 */
 }
 
+/* ---------- 02 顶部导航 Navbar ---------- */
 .navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(13, 15, 20, 0.95);
-  border-bottom: 1px solid #232834;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 8%;
+  position: sticky;       /* 页面滚动时将导航栏吸附在顶部 */
+  top: 0;                 /* 与浏览器顶部对齐 */
+  z-index: 1000;          /* 确保导航在一般内容之上 */
+  background: rgba(16, 17, 20, 0.96); /* 96% 不透明深灰 */
+  border-bottom: 1px solid #292C32; /* 导航栏下方细分隔线 */
+  backdrop-filter: blur(12px); /* 后方内容经过时轻微模糊 */
+  display: flex;          /* 品牌与导航横向排列 */
+  justify-content: space-between; /* 品牌靠左，菜单靠右 */
+  align-items: center;    /* 垂直居中 */
+  padding: 22px 8%;       /* 上下22px、左右8% */
 }
-
-.logo {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #ff8c32;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: #d8dde7;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #ff8c32;
-}
-
-.hero {
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  padding: 80px 8%;
-  background:
-    linear-gradient(rgba(13, 15, 20, 0.85), rgba(13, 15, 20, 0.95)),
-    radial-gradient(circle at top right, rgba(255, 140, 50, 0.15), transparent 30%);
-}
-
-.hero-content {
-  max-width: 760px;
-}
-
-.tag,
-.section-tag {
-  color: #ff8c32;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-}
-
-.hero h1 {
-  font-size: 3.4rem;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.hero-text {
-  max-width: 680px;
-  color: #c8cfdb;
-  font-size: 1.1rem;
-  margin-bottom: 32px;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 22px;
-  border-radius: 8px;
-  font-weight: 700;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  opacity: 0.95;
-}
-
-.btn-primary {
-  background: #ff8c32;
-  color: #111;
-}
-
-.btn-secondary {
-  border: 1px solid #3b4558;
-  color: #f5f7fa;
-}
-
-.section {
-  padding: 80px 8%;
-}
-
-.section-dark {
-  background-color: #11151d;
-}
-
-.section-header {
-  margin-bottom: 36px;
-}
-
-.section h2,
-.footer h2 {
-  font-size: 2rem;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.card {
-  background: #171c25;
-  border: 1px solid #252c38;
-  border-radius: 14px;
-  overflow: hidden;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: #ff8c32;
-}
-
-.card-image {
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #1c2230, #0f131b);
-  color: #8d98ab;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.card-body {
-  padding: 20px;
-}
-
-.card-body h3 {
-  margin-bottom: 12px;
-  color: #ffffff;
-}
-
-.card-body p {
-  color: #c3cad6;
-  font-size: 0.96rem;
-}
-
-.focus-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-.focus-item {
-  background: #171c25;
-  border: 1px solid #252c38;
-  border-radius: 12px;
-  padding: 24px;
-}
-
-.focus-item h3 {
-  margin-bottom: 10px;
-  color: #ff8c32;
-}
-
-.focus-item p {
-  color: #c3cad6;
-}
-
-.about-box {
-  max-width: 820px;
-  background: #171c25;
-  border: 1px solid #252c38;
-  border-radius: 14px;
-  padding: 28px;
-}
-
-.about-box p {
-  color: #c8cfdb;
-  margin-bottom: 14px;
-}
-
-.footer {
-  padding: 50px 8%;
-  border-top: 1px solid #232834;
-  background: #0a0c10;
-}
-
-.footer p {
-  margin-top: 10px;
-  color: #c8cfdb;
-}
-
-.footer a {
-  color: #ff8c32;
-}
-
-.footer-note {
-  margin-top: 18px;
-  font-size: 0.9rem;
-  color: #8a93a3;
-}
-
-@media (max-width: 900px) {
-  .card-grid,
-  .focus-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .nav-links {
-    gap: 14px;
-    font-size: 0.95rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-}
-
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    gap: 14px;
-    align-items: flex-start;
-  }
-
-  .hero {
-    padding-top: 60px;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .hero-text {
-    font-size: 1rem;
-  }
-}
-
-/* Portfolio Visual Upgrade - Phase 1 */
-
-body {
-  background-color: #101114;
-  color: #EAECEF;
-}
-
-.navbar {
-  padding: 22px 8%;
-  background: rgba(16, 17, 20, 0.96);
-  border-bottom: 1px solid #292C32;
-  backdrop-filter: blur(12px);
-}
-
 .logo {
   font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-weight: 700;        /* 粗体 */
+  letter-spacing: 1.5px;  /* 字母之间留出适度距离 */
   color: #EAECEF;
 }
-
 .logo-dot {
-  color: #D6A36B;
+  color: #D6A36B;       /* 品牌名称末尾的金色小点 */
 }
-
 .nav-links {
-  gap: 36px;
+  display: flex;          /* 导航项横向排列 */
+  gap: 36px;              /* 相邻菜单项之间的距离 */
+  list-style: none;       /* 隐藏 ul 列表原有小圆点 */
 }
-
 .nav-links a {
   color: #AEB5BE;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 1.4px;
+  transition: color 0.3s ease; /* 悬停时颜色平滑变化 */
 }
-
 .nav-links a:hover {
-  color: #D6A36B;
+  color: #D6A36B;       /* 鼠标悬停时变金色 */
 }
-
 .nav-links .nav-contact {
-  color: #D6A36B;
+  color: #D6A36B;       /* CONTACT 默认突出显示 */
 }
 
-.tag,
-.section-tag {
-  color: #D6A36B;
-}
-
-.btn-primary {
-  background: #D6A36B;
-}
-
-.focus-item h3,
-.footer a {
-  color: #D6A36B;
-}
-
-.card:hover {
-  border-color: #D6A36B;
-}
-
-@media (max-width: 600px) {
-  .nav-links {
-    gap: 16px;
-  }
-}
-
-/* ========================================
-   HERO SECTION - PORTFOLIO V2
-======================================== */
-
+/* ---------- 03 Hero：网站首页首屏 ---------- */
 .hero {
-  position: relative;
-  min-height: 88vh;
+  position: relative;     /* 让内部绝对定位装饰相对此容器定位 */
+  min-height: 88vh;       /* 最小高度为浏览器可视高度的 88% */
   display: flex;
-  align-items: center;
-  overflow: hidden;
-  padding: 110px 8% 50px;
+  align-items: center;    /* 文字内容垂直居中 */
+  overflow: hidden;       /* 隐藏超出首屏范围的光晕和网格 */
+  padding: 110px 8% 50px;/* 上、左右、下的留白 */
   background: #101114;
 }
-
-/* Subtle background glow */
 .hero-glow {
-  position: absolute;
+  position: absolute;     /* 放在首屏内部，不挤占文字排版空间 */
   top: 5%;
-  right: -15%;
+  right: -15%;            /* 向屏幕右侧溢出，制造柔和的边缘效果 */
   width: 65%;
   height: 90%;
   background: radial-gradient(
     ellipse at center,
-    rgba(214, 163, 107, 0.10) 0%,
+    rgba(214, 163, 107, 0.10) 0%, /* 中央微弱金色 */
     rgba(214, 163, 107, 0.025) 40%,
-    transparent 70%
+    transparent 70%              /* 外侧渐变为透明 */
   );
-  pointer-events: none;
+  pointer-events: none;   /* 装饰层不阻挡按钮点击 */
 }
-
-/* Subtle technical grid */
+/* ::before 是 CSS 自动生成的装饰层，无须改 HTML。 */
 .hero::before {
-  content: "";
+  content: "";            /* 伪元素必须有 content */
   position: absolute;
-  inset: 0;
+  inset: 0;               /* 占满首屏（四边均为0） */
   background-image:
-    linear-gradient(
-      rgba(255,255,255,0.025) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.025) 1px,
-      transparent 1px
-    );
-  background-size: 64px 64px;
-  mask-image: linear-gradient(
-    to right,
-    transparent 5%,
-    black 100%
-  );
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px; /* 形成 64px × 64px 的科技网格 */
+  mask-image: linear-gradient(to right, transparent 5%, black 100%);
   pointer-events: none;
 }
-
 .hero-content {
   position: relative;
-  z-index: 2;
-  max-width: 950px;
+  z-index: 2;             /* 内容盖在装饰层上面 */
+  max-width: 950px;       /* 大屏幕时避免文字横向伸展过宽 */
   width: 100%;
 }
-
 .hero-eyebrow {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 14px;              /* 金色短线与文字之间的距离 */
   margin-bottom: 30px;
   color: #D6A36B;
   font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 2px;
 }
-
 .eyebrow-line {
   width: 32px;
   height: 2px;
   background: #D6A36B;
 }
-
 .hero h1 {
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-size: clamp(3rem, 6vw, 6rem); /* 最小3rem，随屏幕变化，最大6rem */
   font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -2.5px;
+  line-height: 1.08;       /* 紧凑的两行大标题 */
+  letter-spacing: -2.5px; /* 大标题字距稍紧凑 */
   margin-bottom: 32px;
   color: #F2F3F5;
 }
-
 .hero-accent {
-  color: #D6A36B;
+  color: #D6A36B;       /* Building Identity. 这一行的金色 */
 }
-
 .hero-text {
   max-width: 640px;
   font-size: 1.1rem;
@@ -440,34 +148,49 @@ body {
   color: #A9B0BA;
   margin-bottom: 42px;
 }
-
 .hero-buttons {
   display: flex;
   gap: 18px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;        /* 宽度不足时按钮换行 */
 }
-
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.btn:hover {
+  transform: translateY(-2px); /* 悬停时向上移动 2px */
+  opacity: 0.95;
+}
+.btn-primary {
+  background: #D6A36B;
+  color: #111;
+}
+.btn-secondary {
+  border: 1px solid #3b4558;
+  color: #f5f7fa;
+}
+/* 首屏中的按钮采用更扁平的最终视觉样式。 */
 .hero-buttons .btn {
   padding: 15px 26px;
   border-radius: 3px;
   font-size: 0.78rem;
   letter-spacing: 1.4px;
 }
-
 .hero-buttons .btn-primary {
   background: #D6A36B;
   color: #101114;
 }
-
 .hero-buttons .btn-secondary {
   background: transparent;
   border: 1px solid #565B65;
   color: #EAECEF;
 }
-
 .hero-bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 两段辅助文案分别靠左右两端 */
   gap: 20px;
   margin-top: 100px;
   padding-top: 22px;
@@ -478,28 +201,160 @@ body {
   letter-spacing: 1.5px;
 }
 
-/* Mobile adaptation */
+/* ---------- 04 通用章节标题与间距 ---------- */
+.section {
+  padding: 80px 8%;
+}
+.section-dark {
+  background-color: #11151d; /* Design Focus 的略浅深色背景 */
+}
+.section-header {
+  margin-bottom: 36px;
+}
+.tag,
+.section-tag {
+  color: #D6A36B;
+  text-transform: uppercase; /* 显示为大写字母 */
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+.section h2,
+.footer h2 {
+  font-size: 2rem;
+}
+
+/* ---------- 05 Featured Projects 作品网格 ---------- */
+.card-grid {
+  display: grid;                  /* CSS Grid：让卡片整齐成列 */
+  grid-template-columns: repeat(3, 1fr); /* 桌面端三列等宽 */
+  gap: 24px;
+}
+.card {
+  background: #171c25;
+  border: 1px solid #252c38;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px); /* 作品卡悬停上浮 */
+  border-color: #D6A36B;
+}
+.card-image {
+  height: 220px;                  /* 暂时用于封面占位的固定高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1c2230, #0f131b);
+  color: #8d98ab;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.card-body {
+  padding: 20px;                 /* 卡片内文与边框之间的留白 */
+}
+.card-body h3 {
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+.card-body p {
+  color: #c3cad6;
+  font-size: 0.96rem;
+}
+
+/* ---------- 06 Design Focus 能力网格 ---------- */
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 桌面两列 */
+  gap: 24px;
+}
+.focus-item {
+  background: #171c25;
+  border: 1px solid #252c38;
+  border-radius: 12px;
+  padding: 24px;
+}
+.focus-item h3 {
+  margin-bottom: 10px;
+  color: #D6A36B;
+}
+.focus-item p {
+  color: #c3cad6;
+}
+
+/* ---------- 07 About 个人简介 ---------- */
+.about-box {
+  max-width: 820px;
+  background: #171c25;
+  border: 1px solid #252c38;
+  border-radius: 14px;
+  padding: 28px;
+}
+.about-box p {
+  color: #c8cfdb;
+  margin-bottom: 14px;
+}
+
+/* ---------- 08 Footer 联系方式 ---------- */
+.footer {
+  padding: 50px 8%;
+  border-top: 1px solid #232834;
+  background: #0a0c10;
+}
+.footer p {
+  margin-top: 10px;
+  color: #c8cfdb;
+}
+.footer a {
+  color: #D6A36B;
+}
+.footer-note {
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: #8a93a3;
+}
+
+/* ---------- 09 响应式设计：平板/窄屏（宽度 <= 900px） ---------- */
+@media (max-width: 900px) {
+  .card-grid,
+  .focus-grid {
+    grid-template-columns: 1fr; /* 卡片纵向单列显示 */
+  }
+  .nav-links {
+    gap: 14px;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
+
+/* ---------- 10 响应式设计：手机（宽度 <= 600px） ---------- */
 @media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* 品牌与菜单从左右排改为上下排 */
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .nav-links {
+    gap: 16px;
+  }
   .hero {
     min-height: 80vh;
     padding: 90px 7% 35px;
   }
-
   .hero h1 {
-    font-size: clamp(2.5rem, 10vw, 4rem);
+    font-size: clamp(2.5rem, 10vw, 4rem); /* 适配手机屏幕的大标题 */
     letter-spacing: -1.5px;
   }
-
   .hero-eyebrow {
     font-size: 0.65rem;
     letter-spacing: 1px;
   }
-
   .hero-text {
     font-size: 0.98rem;
     line-height: 1.75;
   }
-
   .hero-bottom {
     margin-top: 65px;
     font-size: 0.55rem;
