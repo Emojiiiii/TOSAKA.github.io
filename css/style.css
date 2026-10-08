@@ -585,3 +585,91 @@ a {
     will-change: auto;
   }
 }
+
+
+/* ==================================================
+   13. 全屏翻页滚动（Full-page Scrolling）
+   ================================================== */
+
+/*
+  启用纵向滚动吸附：
+  当用户停止滚动时，自动对齐最近的页面。
+
+  mandatory：
+  浏览器会强制吸附到某个滚动位置。
+
+  smooth：
+  点击导航栏锚点时平滑滚动。
+*/
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  /*
+    为固定在顶部的导航栏预留空间，
+    防止滚动后标题被导航栏遮住。
+  */
+  scroll-padding-top:
+    var(--portfolio-nav-height, 76px);
+}
+
+/*
+  为每个主要区域设置滚动吸附位置。
+
+  注意：
+  不修改原有 padding、背景色和排版。
+*/
+main > section {
+  scroll-snap-align: start;
+
+  /*
+    尽量让一个章节占满剩余屏幕高度。
+    如果文字过多，允许章节继续变高，
+    避免内容被截断。
+  */
+  min-height: calc(
+    100svh - var(--portfolio-nav-height, 76px)
+  );
+}
+
+/*
+  每次进入章节时，都将该章节顶部
+  对齐到导航栏下方。
+*/
+.hero,
+#projects,
+#focus,
+#about {
+  scroll-snap-align: start;
+}
+
+/*
+  联系信息作为最后一页。
+  内容较少时，不强制填满整个屏幕。
+*/
+.footer {
+  scroll-snap-align: start;
+}
+
+/*
+  手机端采用更自然的滚动吸附。
+
+  proximity：
+  只有滚动位置靠近章节边界时，
+  才自动吸附，方便阅读较长的文字。
+*/
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/*
+  对减少动态效果的用户关闭平滑动画。
+*/
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+}
