@@ -647,10 +647,13 @@ main > section {
   联系信息作为最后一页。
   内容较少时，不强制填满整个屏幕。
 */
+/*
+  Contact 作为普通 Footer，
+  不参与 CSS 全屏滚动吸附。
+*/
 .footer {
-  scroll-snap-align: start;
+  scroll-snap-align: none;
 }
-
 /*
   手机端采用更自然的滚动吸附。
 
