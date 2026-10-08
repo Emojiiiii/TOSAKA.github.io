@@ -26,29 +26,17 @@ body {
   /* 网站默认字体 */
   font-family: Arial, Helvetica, sans-serif;
 
-  /* 背景图片加载失败时显示的备用颜色 */
+  /* 整个网站使用深色背景 */
   background-color: #0d0f14;
 
-  /* 设置网站背景图片 */
-background-image: url("../images/test_1.jpg");
-
-/* 背景图片居中 */
-background-position: center;
-
-/* 背景图片自动覆盖整个区域 */
-background-size: cover;
-
-/* 防止背景图片重复 */
-background-repeat: no-repeat;
-
-  /* 页面内容较少时，背景至少覆盖整个屏幕 */
-  min-height: 100vh;
-
-  /* 默认文字颜色 */
+  /* 网站默认文字颜色 */
   color: #f5f7fa;
 
   /* 文字行高 */
   line-height: 1.6;
+
+  /* 确保页面至少和浏览器窗口一样高 */
+  min-height: 100vh;
 }
 
 a {
@@ -98,15 +86,42 @@ a {
 }
 
 /* ---------- 03 Hero：网站首页首屏 ---------- */
+
 .hero {
-  position: relative;     /* 让内部绝对定位装饰相对此容器定位 */
-  min-height: 88vh;       /* 最小高度为浏览器可视高度的 88% */
+  /* 设置 Hero 区域为相对定位 */
+  position: relative;
+
+  /* 首页首屏最小高度为浏览器高度的 88% */
+  min-height: 88vh;
+
+  /* 使用 Flex 布局 */
   display: flex;
-  align-items: center;    /* 文字内容垂直居中 */
-  overflow: hidden;       /* 隐藏超出首屏范围的光晕和网格 */
-  padding: 110px 8% 50px;/* 上、左右、下的留白 */
-  background: #101114;
+
+  /* 让文字内容垂直居中 */
+  align-items: center;
+
+  /* 隐藏超出首屏范围的元素 */
+  overflow: hidden;
+
+  /* 设置文字与边缘的距离 */
+  padding: 110px 8% 50px;
+
+  /* 设置首页背景图片 */
+  background-image: url("../images/test_1.jpg");
+
+  /* 图片居中显示 */
+  background-position: center center;
+
+  /* 图片覆盖整个 Hero 区域 */
+  background-size: cover;
+
+  /* 防止图片重复 */
+  background-repeat: no-repeat;
+
+  /* 图片加载失败时的备用背景颜色 */
+  background-color: #101114;
 }
+
 .hero-glow {
   position: absolute;     /* 放在首屏内部，不挤占文字排版空间 */
   top: 5%;
