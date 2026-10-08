@@ -748,3 +748,38 @@ main > section {
     height: 170px;
   }
 }
+
+
+/* ==================================================
+   15. 防止 CSS 吸附干扰 JavaScript 翻页
+   ================================================== */
+
+/*
+  电脑端：
+  交由 JavaScript 控制每次翻页的距离与时间。
+*/
+@media (min-width: 769px) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
+/*
+  手机端：
+  使用自然滚动和较轻的吸附效果。
+*/
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* 减少动态效果时不使用吸附 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
+
