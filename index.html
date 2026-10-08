@@ -37,7 +37,12 @@
         <!-- 当前网页暂无 id="journal" 区域；此链接暂时无法定位到内容。 -->
         <li><a href="#journal">JOURNAL</a></li>
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#contact" class="nav-contact">CONTACT</a></li>
+        <!-- 点击 CONTACT 按钮打开联系方式弹窗 -->
+        <li>
+          <a href="#contact" class="nav-contact" id="open-contact">
+            CONTACT
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -245,17 +250,73 @@
 
   </main>
 
-  <!-- ========== 06 Footer：联系信息和版权 ==========
-       重要：your-email@example.com 是占位邮箱，实际求职前务必替换。
-  -->
-  <footer id="contact" class="footer">
-    <h2>Contact</h2>
-    <p>Email: lin.xinyuan@outlook.com</p>
-    <p>GitHub: <a href="https://github.com/Emojiiiii" target="_blank">github.com/Emojiiiii</a></p>
-    <p class="footer-note">© 2026 Emojiiiii. All rights reserved.</p>
-    
-  </footer>
+  <!-- ========== 06 Footer：联系信息和版权 ========== -->  
+  <!-- ==========================================
+       Contact 联系方式弹窗
   
+       默认隐藏，不占据网页滚动空间。
+       只有点击 CONTACT 时才显示。
+       ========================================== -->
+  <div
+    id="contact-modal"
+    class="contact-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contact-title"
+    aria-hidden="true"
+    hidden
+  >
+    <!-- 半透明遮罩：点击可关闭 -->
+    <div class="contact-overlay" id="contact-overlay"></div>
+  
+    <!-- 弹窗内容 -->
+    <div class="contact-panel" tabindex="-1">
+  
+      <!-- 顶部标题与关闭按钮 -->
+      <div class="contact-header">
+        <span class="contact-label">GET IN TOUCH / 联系我</span>
+  
+        <button
+          type="button"
+          class="contact-close"
+          id="close-contact"
+          aria-label="关闭联系方式"
+        >
+          ×
+        </button>
+      </div>
+  
+      <h2 id="contact-title">Let's Connect.</h2>
+  
+      <p class="contact-description">
+        如果你对我的作品感兴趣，
+        或希望进一步交流游戏设计方面的想法，
+        欢迎与我联系。
+      </p>
+  
+      <!-- 邮箱 -->
+      <a
+        class="contact-link"
+        href="mailto:lin.xinyuan@outlook.com"
+      >
+        <span>EMAIL</span>
+        <strong>lin.xinyuan@outlook.com ↗</strong>
+      </a>
+  
+      <!-- GitHub -->
+      <a
+        class="contact-link"
+        href="https://github.com/Emojiiiii"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>GITHUB</span>
+        <strong>github.com/Emojiiiii ↗</strong>
+      </a>
+  
+    </div>
+  </div>
+
   <!-- ==========================================
        JavaScript 功能模块
 
