@@ -10,6 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | escape }} | TOSAKA Portfolio</title>
   <link rel="stylesheet" href="{{ '/css/journal.css' | relative_url }}">
+  <!-- 复用 Journal 的 Contact 弹窗样式 -->
+  <link rel="stylesheet" href="{{ '/css/contact.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/css/typography.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/css/navigation.css' | relative_url }}">
 </head>
@@ -18,10 +20,33 @@
     <a href="{{ '/' | relative_url }}" class="journal-logo">
       XINYUAN LIN<span class="logo-dot">.</span>
     </a>
+    <!-- 与 Journal 一致的顶部导航栏 -->
     <nav class="journal-nav" aria-label="Main navigation">
-      <a href="{{ '/' | relative_url }}">HOME</a>
-      <a href="{{ '/#projects' | relative_url }}" class="active">WORK</a>
-      <a href="{{ '/journal/' | relative_url }}">JOURNAL</a>
+    
+      <!-- 返回首页 -->
+      <a href="{{ '/' | relative_url }}">
+        HOME
+      </a>
+    
+      <!-- 打开 Pages CMS 编辑后台 -->
+      <a
+        href="https://app.pagescms.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="journal-edit"
+      >
+        EDIT
+      </a>
+    
+      <!-- 打开联系方式弹窗 -->
+      <a
+        href="#contact"
+        id="open-contact"
+        class="journal-contact"
+      >
+        CONTACT
+      </a>
+    
     </nav>
   </header>
   <main class="journal-main">
