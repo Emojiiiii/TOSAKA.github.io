@@ -19,7 +19,7 @@ markdown: kramdown
 # =====================================
 
 collections:
-  journal:
+  article:
     output: true
     permalink: /journal/entries/:name/
 
@@ -31,16 +31,8 @@ theme: null
 # =====================================
 
 defaults:
-  # 兼容当前旧文章
-  - scope:
-      path: "journal/content"
-      type: "pages"
-    values:
-      layout: "journal-post"
-
-  # 新 Journal 集合的文章
   - scope:
       path: ""
-      type: "journal"
+      type: "article"
     values:
       layout: "journal-post"
