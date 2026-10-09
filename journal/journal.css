@@ -1,0 +1,237 @@
+
+/* ==================================================
+   JOURNAL 页面独立样式
+   文件位置：css/journal.css
+
+   说明：
+   1. 不影响首页 style.css
+   2. 桌面端与移动端自适应
+   3. 为后续文章卡片与动画预留结构
+================================================== */
+
+
+/* ========== 01. 全局变量 ========== */
+
+:root {
+  --journal-bg: #0d0f14;
+  --journal-text: #f5f7fa;
+  --journal-muted: #9ca3af;
+  --journal-accent: #8ba9ff;
+  --journal-border: rgba(255, 255, 255, 0.12);
+
+  --journal-max-width: 1200px;
+}
+
+
+/* ========== 02. 基础样式 ========== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background: var(--journal-bg);
+  color: var(--journal-text);
+
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ========== 03. 顶部导航栏 ========== */
+
+.journal-header {
+  width: 100%;
+  height: 90px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 6%;
+
+  border-bottom: 1px solid var(--journal-border);
+}
+
+.journal-logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.journal-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.journal-nav a {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: var(--journal-muted);
+
+  transition: color 0.25s ease;
+}
+
+.journal-nav a:hover,
+.journal-nav a.active {
+  color: var(--journal-text);
+}
+
+
+/* ========== 04. 主体布局 ========== */
+
+.journal-main {
+  width: 100%;
+  max-width: var(--journal-max-width);
+
+  margin: 0 auto;
+  padding: 100px 6% 120px;
+
+  flex: 1;
+}
+
+
+/* ========== 05. 页面介绍区域 ========== */
+
+.journal-intro {
+  margin-bottom: 100px;
+}
+
+.journal-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  color: var(--journal-accent);
+
+  margin-bottom: 20px;
+}
+
+.journal-intro h1 {
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 700;
+
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+
+  margin-bottom: 28px;
+}
+
+.journal-description {
+  max-width: 560px;
+
+  font-size: 1rem;
+  color: var(--journal-muted);
+
+  line-height: 1.8;
+}
+
+
+/* ========== 06. 文章列表区域 ========== */
+
+.journal-posts {
+  padding-top: 40px;
+
+  border-top: 1px solid var(--journal-border);
+
+  color: var(--journal-muted);
+
+  font-size: 0.95rem;
+}
+
+
+/* ========== 07. 页面底部 ========== */
+
+.journal-footer {
+  width: 100%;
+
+  padding: 30px 6%;
+
+  border-top: 1px solid var(--journal-border);
+
+  text-align: center;
+
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+
+  color: var(--journal-muted);
+}
+
+
+/* ========== 08. 移动端适配 ========== */
+
+@media (max-width: 768px) {
+
+  .journal-header {
+    height: 72px;
+    padding: 0 6%;
+  }
+
+  .journal-logo {
+    font-size: 1rem;
+  }
+
+  .journal-nav {
+    gap: 18px;
+  }
+
+  .journal-nav a {
+    font-size: 0.68rem;
+  }
+
+  .journal-main {
+    padding: 80px 6% 100px;
+  }
+
+  .journal-intro {
+    margin-bottom: 70px;
+  }
+
+  .journal-intro h1 {
+    font-size: clamp(3.5rem, 15vw, 5rem);
+  }
+
+  .journal-description {
+    font-size: 0.9rem;
+  }
+
+  .journal-footer {
+    padding: 25px 6%;
+  }
+
+}
+
+
+/* ========== 09. 减少动画偏好 ========== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .journal-nav a {
+    transition: none;
+  }
+}
+
