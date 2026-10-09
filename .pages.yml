@@ -9,11 +9,10 @@ media:
 
 # 02. Journal 文章管理
 content:
-  - name: journal
+  - name: article
     label: Journal
     type: collection
 
-    # 文章保存位置
     path: _article
 
     # 使用 Markdown 文件
