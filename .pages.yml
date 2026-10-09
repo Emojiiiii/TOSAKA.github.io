@@ -17,7 +17,9 @@ content:
 
     # 使用 Markdown 文件
     format: yaml-frontmatter
-    filename: "{fields.slug}.md"
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
 
     # 管理界面显示
     view:
@@ -34,14 +36,6 @@ content:
         label: Title
         type: string
         required: true
-
-      # 文章文件名（英文）
-      - name: slug
-        label: URL Slug
-        type: string
-        required: true
-        description: "Use lowercase English letters, numbers and hyphens."
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
         
       # =====================================
       # 文章发布状态
