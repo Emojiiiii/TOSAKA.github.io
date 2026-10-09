@@ -365,7 +365,6 @@ a {
   color: var(--journal-accent);
 }
 
-
 /* ========== 平板与手机适配 ========== */
 
 @media (max-width: 768px) {
@@ -389,7 +388,6 @@ a {
 
 }
 
-
 /* ========== 减少动画偏好 ========== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -403,4 +401,16 @@ a {
     transform: none;
   }
 
+}
+
+/* ========== 11. 整张文章卡片可点击 ========== */
+
+.journal-card-clickable {
+  display: block;
+  height: 100%;
+}
+
+.journal-card-clickable:focus-visible {
+  outline: 2px solid var(--journal-accent);
+  outline-offset: 6px;
 }
