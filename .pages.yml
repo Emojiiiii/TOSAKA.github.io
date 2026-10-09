@@ -14,7 +14,7 @@ content:
     type: collection
 
     # 文章保存位置
-    path: _journal
+    path: _article
 
     # 使用 Markdown 文件
     format: yaml-frontmatter
