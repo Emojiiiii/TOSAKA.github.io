@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="css/typography.css" />
   <!-- 首页和 Journal 共用导航栏尺寸/间距 -->
   <link rel="stylesheet" href="css/navigation.css" />
+  <!-- Portfolio 三张卡片的整卡点击与键盘焦点 -->
+  <link rel="stylesheet" href="css/portfolio-cards.css" />
 </head>
 <body>
   <!-- ========== 01 顶部导航栏（Navigation）==========
@@ -119,6 +121,8 @@
       <div class="card-grid">
         <!-- 作品卡片 01：武器皮肤；换真实项目时修改标题和简介。 -->
         <article class="card">
+          <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
+          <a class="portfolio-card-link" href="work/weapons/">
           <div class="card-image placeholder">Project 01</div><!-- 未来可替换成 img 元素 -->
           <div class="card-body">
             <h3>武器皮肤</h3>
@@ -126,10 +130,13 @@
               一些照葫芦画瓢的武器皮肤设计
             </p>
           </div>
+          </a>
         </article>
 
         <!-- 作品卡片 02：游戏分析和心得。 -->
         <article class="card">
+          <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
+          <a class="portfolio-card-link" href="work/analysis/">
           <div class="card-image placeholder">Project 02</div>
           <div class="card-body">
             <h3>游戏分析和心得</h3>
@@ -137,10 +144,13 @@
               一些游玩游戏后不成熟的看法和总结
             </p>
           </div>
+          </a>
         </article>
 
         <!-- 作品卡片 03：代码。 -->
         <article class="card">
+          <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
+          <a class="portfolio-card-link" href="work/code/">
           <div class="card-image placeholder">Project 03</div>
           <div class="card-body">
             <h3>代码相关</h3>
@@ -148,6 +158,7 @@
               上传一些曾经做过的作业和项目
             </p>
           </div>
+          </a>
         </article>
       </div>
       

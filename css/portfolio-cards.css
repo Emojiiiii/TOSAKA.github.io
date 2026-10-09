@@ -1,0 +1,14 @@
+/* Portfolio: 保留现有 .card 的全部排版，仅添加整卡可点击功能。 */
+.portfolio-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 方便键盘用户通过 Tab 找到作品分类入口。 */
+.portfolio-card-link:focus-visible {
+  outline: 2px solid #D6A36B;
+  outline-offset: -4px;
+  border-radius: 12px;
+}
