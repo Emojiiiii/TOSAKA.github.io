@@ -1,0 +1,26 @@
+
+# =====================================
+# TOSAKA 网站 - Jekyll 配置
+# =====================================
+
+# 网站基本信息
+title: TOSAKA Portfolio
+description: Game Design Portfolio
+
+# 网站地址
+url: "https://emojiiiii.github.io"
+baseurl: "/TOSAKA.github.io"
+
+# Markdown 解析器
+markdown: kramdown
+
+# 不使用第三方主题
+theme: null
+
+# Journal Markdown 文件默认设置
+defaults:
+  - scope:
+      path: "journal/content"
+      type: "pages"
+    values:
+      layout: "journal-post"
