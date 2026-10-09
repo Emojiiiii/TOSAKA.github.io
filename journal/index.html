@@ -23,6 +23,8 @@ layout: null
   >
   <!-- 全站统一字体：必须放在其它 CSS 后面 -->
   <link rel="stylesheet" href="{{ '/css/typography.css' | relative_url }}">
+  <!-- 首页和 Journal 共用导航栏尺寸/间距 -->
+  <link rel="stylesheet" href="{{ '/css/navigation.css' | relative_url }}">
 </head>
 
 <body>
@@ -32,7 +34,7 @@ layout: null
 
     <a href="{{ '/' | relative_url }}"
        class="journal-logo">
-      XINYUAN
+      XINYUAN LIN<span class="logo-dot">.</span>
     </a>
 
     <nav class="journal-nav">
