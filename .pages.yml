@@ -1,0 +1,68 @@
+
+# ==========================================
+# TOSAKA JOURNAL - Pages CMS 配置
+# ==========================================
+
+# 01. 图片存储位置
+media:
+  input: images/journal
+  output: /TOSAKA.github.io/images/journal
+
+# 02. Journal 文章管理
+content:
+  - name: journal
+    label: Journal
+    type: collection
+
+    # 文章保存位置
+    path: journal/content
+
+    # 使用 Markdown 文件
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+
+    # 管理界面显示
+    view:
+      fields: [title, date, category]
+      primary: title
+
+    # 03. 文章编辑字段
+    fields:
+
+      # 文章标题
+      - name: title
+        label: Title
+        type: string
+        required: true
+
+      # 发布日期
+      - name: date
+        label: Date
+        type: date
+        required: true
+
+      # 文章分类
+      - name: category
+        label: Category
+        type: select
+        options:
+          values:
+            - Game Design
+            - Development
+            - Thoughts
+            - Other
+
+      # 简短介绍
+      - name: description
+        label: Description
+        type: text
+
+      # 文章封面
+      - name: cover
+        label: Cover Image
+        type: image
+
+      # 文章正文
+      - name: body
+        label: Article Content
+        type: rich-text
