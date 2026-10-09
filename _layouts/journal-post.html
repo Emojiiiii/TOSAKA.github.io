@@ -20,7 +20,7 @@
         href="{{ '/css/article.css' | relative_url }}">
 </head>
 
-<body>
+<body data-baseurl="{{ site.baseurl | default: '' }}">
 
   <!-- ========== 01. 顶部导航 ========== -->
   <header class="journal-header">
@@ -118,6 +118,11 @@
 
   </footer>
 
+  <!-- Journal 正文图片路径处理 -->
+  <script
+    src="{{ '/js/journal-images.js' | relative_url }}"
+    defer>
+  </script>
+
 </body>
 </html>
-
