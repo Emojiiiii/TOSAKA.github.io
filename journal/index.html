@@ -66,11 +66,10 @@ layout: null
          按发布日期由新到旧排列
     ====================================== -->
 
-    {% assign entries = site.pages
-       | where_exp: "item", "item.path contains 'journal/content/'"
+    {% assign entries = site.journal
+       | where: "published", true
        | sort: "date"
        | reverse %}
-
 
     <!-- ========== 04. 文章列表 ========== -->
     <section class="journal-posts">
