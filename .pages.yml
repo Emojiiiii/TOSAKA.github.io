@@ -31,6 +31,12 @@ content:
 
       # 文章标题
       
+      # 文章标题（允许中文和英文）
+      - name: title
+        label: Title
+        type: string
+        required: true
+
       # 文章文件名（英文）
       - name: slug
         label: URL Slug
