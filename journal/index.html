@@ -1,101 +1,193 @@
+
+---
+layout: null
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
 
-  <!-- 适配手机、平板和电脑 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-  <!-- 浏览器标签页标题 -->
   <title>Journal | XINYUAN</title>
 
-  <!-- Journal 独立样式表（下一步创建） -->
-  <link rel="stylesheet" href="../css/journal.css">
+  <!-- Journal 独立 CSS -->
+  <link rel="stylesheet"
+        href="{{ '/css/journal.css' | relative_url }}">
 </head>
 
 <body>
 
-  <!-- ========== JOURNAL 顶部导航 ========== -->
+  <!-- ========== 01. 顶部导航 ========== -->
   <header class="journal-header">
-    <a href="../index.html" class="journal-logo">XINYUAN</a>
+
+    <a href="{{ '/' | relative_url }}"
+       class="journal-logo">
+      XINYUAN
+    </a>
 
     <nav class="journal-nav">
-      <a href="../index.html">HOME</a>
-      <a href="./index.html" class="active">JOURNAL</a>
+
+      <a href="{{ '/' | relative_url }}">
+        HOME
+      </a>
+
+      <a href="{{ '/journal/' | relative_url }}"
+         class="active">
+        JOURNAL
+      </a>
+
     </nav>
+
   </header>
 
-  <!-- ========== JOURNAL 主内容 ========== -->
+
+  <!-- ========== 02. 主体内容 ========== -->
   <main class="journal-main">
 
+    <!-- 页面介绍 -->
     <section class="journal-intro">
-      <p class="journal-label">THOUGHTS / PROCESS / EXPLORATION</p>
-      <h1>JOURNAL</h1>
-      <p class="journal-description">
-        Notes on game design, development, and creative exploration.
+
+      <p class="journal-label">
+        THOUGHTS / PROCESS / EXPLORATION
       </p>
+
+      <h1>JOURNAL</h1>
+
+      <p class="journal-description">
+        Notes on game design, development,
+        and creative exploration.
+      </p>
+
     </section>
 
-    <!-- 后续在这里添加文章列表 -->
-    
-<!-- ========== JOURNAL 文章列表 ========== -->
-<section class="journal-posts">
 
-  <!-- 列表标题 -->
-  <div class="journal-section-heading">
-    <h2>LATEST ENTRIES</h2>
-    <span>001 — 003</span>
-  </div>
+    <!-- =====================================
+         03. 自动获取 CMS 文章
 
-  <!-- 文章卡片容器 -->
-  <div class="journal-grid">
+         从 journal/content/ 读取 Markdown
+         按发布日期由新到旧排列
+    ====================================== -->
 
-    <!-- ===== 文章 01 ===== -->
-    <article class="journal-card">
-      <a href="./posts/first-post.html" class="journal-card-clickable">
+    {% assign entries = site.pages
+       | where_exp: "item", "item.path contains 'journal/content/'"
+       | sort: "date"
+       | reverse %}
 
-      <div class="journal-card-image">
-        <img
-          src="../images/journal/post-01.jpg"
-          alt="Game design article cover"
-          loading="lazy"
-        >
+
+    <!-- ========== 04. 文章列表 ========== -->
+    <section class="journal-posts">
+
+      <div class="journal-section-heading">
+
+        <h2>LATEST ENTRIES</h2>
+
+        <!-- 自动统计文章总数 -->
+        <span>
+          {{ entries.size }} ENTRIES
+        </span>
+
       </div>
 
-      <div class="journal-card-content">
-        <p class="journal-card-meta">
-          GAME DESIGN / OCT 2026
-        </p>
 
-        <h3>Designing Player Experience</h3>
+      <!-- 文章卡片网格 -->
+      <div class="journal-grid">
 
-        <p class="journal-card-description">
-          Exploring how small design decisions
-          shape the player's experience.
-        </p>
-        
-        <a href="./posts/first-post.html" class="journal-card-link">
-          READ ARTICLE →
-        </a>
+        {% for entry in entries %}
 
-    </article>
+        <!-- ===== 自动生成单篇文章卡片 ===== -->
+        <article class="journal-card">
 
-  
+          <!-- 整张卡片可点击 -->
+          <a href="{{ entry.url | relative_url }}"
+             class="journal-card-clickable">
 
-  </div>
-</section>
+            <!-- 封面 -->
+            <div class="journal-card-image">
 
+              {% if entry.cover and entry.cover != "" %}
+
+              <img
+                src="{{ entry.cover | escape }}"
+                alt="{{ entry.title | escape }}"
+                loading="lazy"
+              >
+
+              {% endif %}
+
+            </div>
+
+
+            <!-- 文章信息 -->
+            <div class="journal-card-content">
+
+              <!-- 分类及日期 -->
+              <p class="journal-card-meta">
+
+                {{ entry.category | escape }}
+
+                /
+
+                {{ entry.date | date: "%b %Y" }}
+
+              </p>
+
+
+              <!-- 标题 -->
+              <h3>
+                {{ entry.title | escape }}
+              </h3>
+
+
+              <!-- 简介 -->
+              {% if entry.description %}
+
+              <p class="journal-card-description">
+                {{ entry.description | escape }}
+              </p>
+
+              {% endif %}
+
+
+              <!-- 阅读提示 -->
+              <span class="journal-card-link">
+                READ ARTICLE →
+              </span>
+
+            </div>
+
+          </a>
+
+        </article>
+
+        {% endfor %}
+
+      </div>
+
+
+      <!-- 没有文章时显示 -->
+      {% if entries.size == 0 %}
+
+      <p class="journal-empty">
+        No journal entries yet.
+      </p>
+
+      {% endif %}
+
+    </section>
 
   </main>
 
-  <!-- ========== 页脚 ========== -->
-  <footer class="journal-footer">
-    <p>© 2026 TOSAKA. All rights reserved.</p>
-  </footer>
 
-  <!-- Journal 独立功能脚本（之后创建） -->
-  <!-- <script src="../js/journal.js"></script> -->
+  <!-- ========== 05. 页脚 ========== -->
+  <footer class="journal-footer">
+
+    <p>© 2026 TOSAKA. All rights reserved.</p>
+
+  </footer>
 
 </body>
 </html>
