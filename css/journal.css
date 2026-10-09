@@ -414,3 +414,37 @@ a {
   outline: 2px solid var(--journal-accent);
   outline-offset: 6px;
 }
+
+/* ==========================================
+   Journal 顶部导航扩展
+   EDIT / CONTACT
+========================================== */
+
+.journal-edit,
+.journal-contact {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* EDIT 保持普通导航颜色 */
+.journal-edit {
+  color: inherit;
+}
+
+/* CONTACT 使用金色 */
+.journal-contact {
+  color: #d6ad60;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+/* 鼠标悬停 */
+.journal-edit:hover,
+.journal-contact:hover {
+  opacity: 0.7;
+}
