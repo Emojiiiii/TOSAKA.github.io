@@ -66,7 +66,7 @@ layout: null
          按发布日期由新到旧排列
     ====================================== -->
 
-    {% assign entries = site.journal
+    {% assign entries = site.article
        | where: "published", true
        | sort: "date"
        | reverse %}
