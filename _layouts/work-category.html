@@ -91,5 +91,70 @@
   <footer class="journal-footer">
     <p>© 2026 TOSAKA. All rights reserved.</p>
   </footer>
+   <!-- ========== 06. 复用首页 CONTACT 弹窗 ========== -->
+  <div
+    id="contact-modal"
+    class="contact-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="contact-title"
+    aria-hidden="true"
+    hidden
+  >
+    <!-- 半透明遮罩：点击可关闭 -->
+    <div class="contact-overlay" id="contact-overlay"></div>
+  
+    <!-- 弹窗内容 -->
+    <div class="contact-panel" tabindex="-1">
+  
+      <!-- 顶部标题与关闭按钮 -->
+      <div class="contact-header">
+        <span class="contact-label">GET IN TOUCH / 联系我</span>
+  
+        <button
+          type="button"
+          class="contact-close"
+          id="close-contact"
+          aria-label="关闭联系方式"
+        >
+          ×
+        </button>
+      </div>
+  
+      <h2 id="contact-title">Let's Connect.</h2>
+  
+      <p class="contact-description">
+        如果你对我的作品感兴趣，
+        或希望进一步交流游戏设计方面的想法，
+        欢迎与我联系。
+      </p>
+  
+      <!-- 邮箱 -->
+      <a
+        class="contact-link"
+        href="mailto:lin.xinyuan@outlook.com"
+      >
+        <span>EMAIL</span>
+        <strong>lin.xinyuan@outlook.com ↗</strong>
+      </a>
+  
+      <!-- GitHub -->
+      <a
+        class="contact-link"
+        href="https://github.com/Emojiiiii"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>GITHUB</span>
+        <strong>github.com/Emojiiiii ↗</strong>
+      </a>
+  
+    </div>
+  </div>
+  <!-- 复用已有 Contact JavaScript -->
+  <script
+    src="{{ '/js/contact.js' | relative_url }}"
+    defer>
+  </script>
 </body>
 </html>
