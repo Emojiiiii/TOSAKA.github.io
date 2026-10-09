@@ -1,4 +1,3 @@
-
 # ==========================================
 # TOSAKA JOURNAL - Pages CMS 配置
 # ==========================================
@@ -15,7 +14,7 @@ content:
     type: collection
 
     # 文章保存位置
-    path: journal/content
+    path: _journal
 
     # 使用 Markdown 文件
     format: yaml-frontmatter
@@ -44,7 +43,18 @@ content:
         required: true
         description: "Use lowercase English letters, numbers and hyphens."
         pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        
+      # =====================================
+      # 文章发布状态
+      # false = 草稿
+      # true  = 正式发布
+      # =====================================
 
+      - name: published
+        label: Published
+        type: boolean
+        default: false
+        description: "Enable to publish this article on the website."
 
       # 发布日期
       - name: date
