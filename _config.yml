@@ -14,13 +14,33 @@ baseurl: "/TOSAKA.github.io"
 # Markdown 解析器
 markdown: kramdown
 
+# =====================================
+# Journal 文章集合
+# =====================================
+
+collections:
+  journal:
+    output: true
+    permalink: /journal/entries/:name/
+
 # 不使用第三方主题
 theme: null
 
-# Journal Markdown 文件默认设置
+# =====================================
+# Journal 文章模板
+# =====================================
+
 defaults:
+  # 兼容当前旧文章
   - scope:
       path: "journal/content"
       type: "pages"
+    values:
+      layout: "journal-post"
+
+  # 新 Journal 集合的文章
+  - scope:
+      path: ""
+      type: "journal"
     values:
       layout: "journal-post"
