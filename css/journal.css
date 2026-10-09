@@ -1,4 +1,3 @@
-
 /* ==================================================
    JOURNAL 页面独立样式
    文件位置：css/journal.css
@@ -435,8 +434,12 @@ a {
   color: inherit;
 }
 
-/* CONTACT 使用金色 */
-.journal-contact {
+/* ==========================================
+   CONTACT 金色导航
+========================================== */
+
+.journal-nav a.journal-contact,
+.journal-nav a.journal-contact:visited {
   color: #d6ad60;
   background: transparent;
   border: none;
