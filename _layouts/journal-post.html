@@ -1,1 +1,123 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <!-- 自动读取文章标题 -->
+  <title>{{ page.title | escape }} | TOSAKA</title>
+
+  <!-- Journal 共用 CSS -->
+  <link rel="stylesheet"
+        href="{{ '/css/journal.css' | relative_url }}">
+
+  <!-- 文章阅读 CSS -->
+  <link rel="stylesheet"
+        href="{{ '/css/article.css' | relative_url }}">
+</head>
+
+<body>
+
+  <!-- ========== 01. 顶部导航 ========== -->
+  <header class="journal-header">
+
+    <a href="{{ '/' | relative_url }}"
+       class="journal-logo">
+      XINYUAN
+    </a>
+
+    <nav class="journal-nav">
+
+      <a href="{{ '/' | relative_url }}">
+        HOME
+      </a>
+
+      <a href="{{ '/journal/' | relative_url }}"
+         class="active">
+        JOURNAL
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- ========== 02. 文章主体 ========== -->
+  <main class="article-main">
+
+    <!-- 返回日志列表 -->
+    <a href="{{ '/journal/' | relative_url }}"
+       class="article-back">
+      ← BACK TO JOURNAL
+    </a>
+
+
+    <!-- ========== 文章信息 ========== -->
+    <header class="article-header">
+
+      <p class="article-meta">
+        {{ page.category | escape }}
+        /
+        {{ page.date | date: "%b %d, %Y" }}
+      </p>
+
+      <h1>{{ page.title | escape }}</h1>
+
+      {% if page.description %}
+      <p class="article-subtitle">
+        {{ page.description | escape }}
+      </p>
+      {% endif %}
+
+    </header>
+
+
+    <!-- ========== 03. 文章封面 ========== -->
+    {% if page.cover and page.cover != "" %}
+
+    <figure class="article-cover">
+
+      <img
+        src="{{ page.cover | relative_url }}"
+        alt="{{ page.title | escape }}"
+      >
+
+    </figure>
+
+    {% endif %}
+
+
+    <!-- ========== 04. 文章正文 ========== -->
+    <article class="article-content">
+
+      {{ content }}
+
+    </article>
+
+
+    <!-- ========== 05. 返回按钮 ========== -->
+    <div class="article-bottom">
+
+      <a href="{{ '/journal/' | relative_url }}">
+        ← ALL JOURNAL ENTRIES
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <!-- ========== 06. 页脚 ========== -->
+  <footer class="journal-footer">
+
+    <p>© 2026 TOSAKA. All rights reserved.</p>
+
+  </footer>
+
+</body>
+</html>
+
