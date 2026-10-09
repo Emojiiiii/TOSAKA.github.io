@@ -1,1 +1,246 @@
 
+/* ==================================================
+   ARTICLE - 独立文章阅读页面样式
+
+   文件位置：css/article.css
+
+   依赖：journal.css
+   所有 Journal 文章共用此文件
+================================================== */
+
+
+/* ========== 01. 文章整体布局 ========== */
+
+.article-main {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding: 80px 6% 120px;
+
+  flex: 1;
+}
+
+
+/* ========== 02. 返回按钮 ========== */
+
+.article-back {
+  display: inline-block;
+
+  margin-bottom: 80px;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: var(--journal-muted);
+
+  transition: color 0.25s ease;
+}
+
+.article-back:hover {
+  color: var(--journal-text);
+}
+
+
+/* ========== 03. 文章头部 ========== */
+
+.article-header {
+  margin-bottom: 55px;
+}
+
+.article-meta {
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: var(--journal-accent);
+
+  margin-bottom: 24px;
+}
+
+.article-header h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+
+  margin-bottom: 28px;
+}
+
+.article-subtitle {
+  max-width: 650px;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+
+  color: var(--journal-muted);
+}
+
+
+/* ========== 04. 文章封面 ========== */
+
+.article-cover {
+  width: 100%;
+
+  margin-bottom: 75px;
+}
+
+.article-cover img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+
+/* ========== 05. 正文排版 ========== */
+
+.article-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.article-content h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+
+  line-height: 1.4;
+
+  margin-top: 60px;
+  margin-bottom: 24px;
+
+  color: var(--journal-text);
+}
+
+.article-content h2:first-child {
+  margin-top: 0;
+}
+
+.article-content p {
+  font-size: 1rem;
+  line-height: 2;
+
+  margin-bottom: 26px;
+
+  color: #c9ced8;
+}
+
+
+/* ========== 06. 正文图片 ========== */
+
+.article-content img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  margin: 40px 0;
+}
+
+
+/* ========== 07. 引用块 ========== */
+
+.article-content blockquote {
+  margin: 50px 0;
+  padding: 20px 0 20px 28px;
+
+  border-left: 2px solid var(--journal-accent);
+
+  font-size: 1.2rem;
+  line-height: 1.8;
+  font-style: italic;
+
+  color: var(--journal-text);
+}
+
+
+/* ========== 08. 文章底部 ========== */
+
+.article-bottom {
+  max-width: 720px;
+
+  margin: 100px auto 0;
+  padding-top: 35px;
+
+  border-top: 1px solid var(--journal-border);
+}
+
+.article-bottom a {
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  letter-spacing: 0.1em;
+
+  color: var(--journal-muted);
+
+  transition: color 0.25s ease;
+}
+
+.article-bottom a:hover {
+  color: var(--journal-accent);
+}
+
+
+/* ========== 09. 移动端适配 ========== */
+
+@media (max-width: 768px) {
+
+  .article-main {
+    padding: 55px 6% 90px;
+  }
+
+  .article-back {
+    margin-bottom: 55px;
+  }
+
+  .article-header {
+    margin-bottom: 40px;
+  }
+
+  .article-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .article-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .article-cover {
+    margin-bottom: 50px;
+  }
+
+  .article-content h2 {
+    font-size: 1.35rem;
+    margin-top: 45px;
+  }
+
+  .article-content p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  .article-bottom {
+    margin-top: 70px;
+  }
+
+}
+
+
+/* ========== 10. 减少动画偏好 ========== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .article-back,
+  .article-bottom a {
+    transition: none;
+  }
+
+}
+
