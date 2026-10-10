@@ -5,8 +5,11 @@ date: 2026-10-10
 category: weapons
 description: |-
   武器类型： BY15 泵动式霰弹枪
+
   皮肤品质： 传说级
+
   文化灵感： 中美洲羽蛇神 Quetzalcoatl
+
   核心设计： 活体羽蛇 × 古代神殿 
 cover: /TOSAKA.github.io/images/work/by15.png
 gallery:
