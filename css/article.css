@@ -246,4 +246,55 @@
   }
 
 }
+/* ==========================================
+   11. Markdown 表格样式
+   Journal / Portfolio 共用
+========================================== */
 
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* 表头和单元格 */
+.article-content th,
+.article-content td {
+  padding: 14px 18px;
+  border: 1px solid var(--journal-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+/* 表头背景 */
+.article-content th {
+  background: #1b202a;
+  color: var(--journal-text);
+  font-weight: 600;
+}
+
+/* 表格正文 */
+.article-content td {
+  color: #c9ced8;
+}
+
+/* 交替行背景 */
+.article-content tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+/* 手机端表格可以横向滚动 */
+@media (max-width: 600px) {
+  .article-content table {
+    display: block;
+    overflow-x: auto;
+    font-size: 0.85rem;
+  }
+
+  .article-content th,
+  .article-content td {
+    padding: 10px 12px;
+  }
+}
