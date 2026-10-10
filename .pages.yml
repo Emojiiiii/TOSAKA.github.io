@@ -131,9 +131,12 @@ content:
             max: 24
           unique: true
           rename: safe
+      # 代码片段编辑器
       - name: code_snippet
         label: Optional Code Snippet
         type: code
+        options:
+          format: markdown
         description: "粘贴短代码；完整工程建议上传 ZIP 或提供 GitHub 链接。"
       - name: code_files
         label: Source Code / ZIP Files
