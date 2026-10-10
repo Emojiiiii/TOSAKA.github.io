@@ -451,3 +451,8 @@ a {
 .journal-contact:hover {
   opacity: 0.7;
 }
+
+/* CMS 卡片简介保留人工换行 */
+.journal-card-description {
+  white-space: pre-line;
+}
