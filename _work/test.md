@@ -13,6 +13,7 @@ description: |-
   核心设计： 活体羽蛇 × 古代神殿 
 cover: /TOSAKA.github.io/images/work/by15.png
 gallery:
+  - /TOSAKA.github.io/images/work/2026-02-15-002035.png
   - /TOSAKA.github.io/images/work/quetzalcoatl-by15-mythic-weapon-concept.png
 ---
 ## 1、设计背景
