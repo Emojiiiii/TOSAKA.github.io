@@ -1,0 +1,16 @@
+/* Portfolio 扩展模块，不修改 Journal 原有 CSS */
+.work-extra { max-width: 720px; margin: 72px auto 0; }
+.work-extra h2 { font-size: .8rem; letter-spacing: .14em; padding-bottom: 14px; margin-bottom: 24px; border-bottom: 1px solid var(--journal-border); color: var(--journal-accent); }
+.work-gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.work-gallery a { display: block; overflow: hidden; background: #191d27; }
+.work-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .25s ease; }
+.work-gallery a:hover img { transform: scale(1.03); }
+.work-videos { display: grid; gap: 24px; }
+.work-videos video { display: block; width: 100%; height: auto; background: #000; }
+.work-code { padding: 20px; background: #111722; border: 1px solid var(--journal-border); overflow: auto; white-space: pre; font-size: .88rem; line-height: 1.6; }
+.work-code code { color: #eef2ff; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.work-downloads { list-style: none; padding: 0; display: grid; gap: 12px; }
+.work-downloads a, .work-link { color: var(--journal-text); overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 4px; }
+.work-downloads a:hover, .work-link:hover { color: var(--journal-accent); }
+@media (max-width: 600px) { .work-extra { margin-top: 48px; } .work-gallery { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .work-gallery img { transition: none; } }

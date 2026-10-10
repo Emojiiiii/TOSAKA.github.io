@@ -1,0 +1,160 @@
+# TOSAKA Pages CMS：Journal 和 Portfolio 分开管理
+# Journal 媒体库放在第一个，保持已有文章默认图片路径
+media:
+  - name: journal_images
+    label: Journal Images
+    input: images/journal
+    output: /TOSAKA.github.io/images/journal
+  - name: work_images
+    label: Portfolio Images
+    input: images/work
+    output: /TOSAKA.github.io/images/work
+    extensions: [jpg, jpeg, png, webp, gif]
+  - name: work_videos
+    label: Portfolio Videos
+    input: videos/work
+    output: /TOSAKA.github.io/videos/work
+    extensions: [mp4, webm]
+  - name: work_files
+    label: Portfolio Source Files
+    input: files/work
+    output: /TOSAKA.github.io/files/work
+    extensions: [cs, py, js, ts, jsx, tsx, c, cpp, h, hpp, java, shader, json, zip, unitypackage]
+
+content:
+  # 现有 Journal：保留以前的字段
+  - name: article
+    label: Journal
+    type: collection
+    path: _article
+    format: yaml-frontmatter
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, date, category]
+      primary: title
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: published
+        label: Published
+        type: boolean
+        default: false
+        description: "Enable to publish this article on the website."
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [Game Design, Development, Thoughts, Other]
+      - name: description
+        label: Description
+        type: text
+      - name: cover
+        label: Cover Image
+        type: image
+        options:
+          media: journal_images
+      - name: body
+        label: Article Content
+        type: rich-text
+        options:
+          media: journal_images
+
+  # 新增 Portfolio：3 个卡片仍共用 1 个 CMS 集合
+  - name: work
+    label: Portfolio Projects
+    type: collection
+    path: _work
+    format: yaml-frontmatter
+    filename:
+      template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+      field: false
+    view:
+      fields: [title, date, category, published]
+      primary: title
+    fields:
+      - name: title
+        label: Project Title
+        type: string
+        required: true
+      - name: published
+        label: Published
+        type: boolean
+        default: false
+      - name: date
+        label: Date
+        type: date
+        required: true
+      # name 是实际存储值，必须与 work 下的分类目录一致
+      - name: category
+        label: Project Category
+        type: select
+        required: true
+        options:
+          values:
+            - name: weapons
+              label: 武器皮肤
+            - name: analysis
+              label: 游戏分析和心得
+            - name: code
+              label: 代码相关
+      - name: description
+        label: Description
+        type: text
+      - name: cover
+        label: Cover Image
+        type: image
+        options:
+          media: work_images
+          rename: safe
+      - name: body
+        label: Project Description / Markdown
+        type: rich-text
+        options:
+          format: markdown
+          switcher: true
+          media: work_images
+          rename: safe
+      - name: gallery
+        label: Multiple Images
+        type: image
+        options:
+          media: work_images
+          multiple:
+            max: 24
+          unique: true
+          rename: safe
+      - name: code_snippet
+        label: Optional Code Snippet
+        type: code
+        description: "粘贴短代码；完整工程建议上传 ZIP 或提供 GitHub 链接。"
+      - name: code_files
+        label: Source Code / ZIP Files
+        type: file
+        options:
+          media: work_files
+          multiple:
+            max: 15
+          unique: true
+      - name: repository_url
+        label: GitHub Repository URL
+        type: string
+      - name: video_files
+        label: Demo Videos (MP4 / WebM)
+        type: file
+        options:
+          media: work_videos
+          multiple:
+            max: 6
+          unique: true
+      - name: video_url
+        label: External Video URL
+        type: string
+        description: "大视频建议上传到 YouTube 等平台，填写视频链接。"

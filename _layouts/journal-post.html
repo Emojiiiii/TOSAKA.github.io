@@ -1,6 +1,5 @@
 {% comment %}
-共用详情模板：同时服务 Journal 和 Portfolio。
-Journal 的返回目标不变；Portfolio 根据分类返回自己的作品列表。
+Journal 与 Portfolio 共用文章模板；作品才会显示多图、视频、代码。
 {% endcomment %}
 {% assign is_work = false %}
 {% if page.collection == 'work' %}
@@ -23,12 +22,13 @@ Journal 的返回目标不变；Portfolio 根据分类返回自己的作品列�
   <link rel="stylesheet" href="{{ '/css/article.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/css/typography.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/css/navigation.css' | relative_url }}">
+  {% if is_work %}
+    <link rel="stylesheet" href="{{ '/css/work-content.css' | relative_url }}">
+  {% endif %}
 </head>
 <body data-baseurl="{{ site.baseurl | default: '' }}">
   <header class="journal-header">
-    <a href="{{ '/' | relative_url }}" class="journal-logo">
-      XINYUAN LIN<span class="logo-dot">.</span>
-    </a>
+    <a href="{{ '/' | relative_url }}" class="journal-logo">XINYUAN LIN<span class="logo-dot">.</span></a>
     <nav class="journal-nav" aria-label="Main navigation">
       <a href="{{ '/' | relative_url }}">HOME</a>
       {% if is_work %}
@@ -41,28 +41,78 @@ Journal 的返回目标不变；Portfolio 根据分类返回自己的作品列�
   <main class="article-main">
     <a href="{{ back_path | relative_url }}" class="article-back">← {{ back_label }}</a>
     <header class="article-header">
-      <p class="article-meta">
-        {{ page.category | escape }} / {{ page.date | date: "%b %d, %Y" }}
-      </p>
+      <p class="article-meta">{{ page.category | escape }} / {{ page.date | date: "%b %d, %Y" }}</p>
       <h1>{{ page.title | escape }}</h1>
       {% if page.description and page.description != "" %}
-      <p class="article-subtitle">{{ page.description | escape }}</p>
+        <p class="article-subtitle">{{ page.description | escape }}</p>
       {% endif %}
     </header>
     {% if page.cover and page.cover != "" %}
-    <figure class="article-cover">
-      <img src="{{ page.cover | escape }}" alt="{{ page.title | escape }}">
-    </figure>
+      <figure class="article-cover"><img src="{{ page.cover | escape }}" alt="{{ page.title | escape }}"></figure>
     {% endif %}
     <article class="article-content">{{ content }}</article>
-    <div class="article-bottom">
-      <a href="{{ back_path | relative_url }}">{{ bottom_label }}</a>
-    </div>
+
+    {% if is_work %}
+      <!-- 多张图片，点图可在新标签页看原图 -->
+      {% if page.gallery and page.gallery.size > 0 %}
+        <section class="work-extra" aria-label="Project gallery">
+          <h2>PROJECT GALLERY</h2>
+          <div class="work-gallery">
+            {% for photo in page.gallery %}
+              <a href="{{ photo | escape }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ photo | escape }}" alt="{{ page.title | escape }} - Image {{ forloop.index }}" loading="lazy">
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+      <!-- MP4/WebM：原生播放控件 -->
+      {% if page.video_files and page.video_files.size > 0 %}
+        <section class="work-extra" aria-label="Project videos">
+          <h2>PROJECT VIDEOS</h2>
+          <div class="work-videos">
+            {% for clip in page.video_files %}
+              <video controls playsinline preload="metadata"><source src="{{ clip | escape }}">Your browser does not support HTML5 video.</video>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+      {% if page.video_url and page.video_url != "" %}
+        <section class="work-extra">
+          <h2>EXTERNAL VIDEO</h2>
+          <a class="work-link" href="{{ page.video_url | escape }}" target="_blank" rel="noopener noreferrer">WATCH VIDEO ↗</a>
+        </section>
+      {% endif %}
+
+      <!-- 代码片段：安全转义为纯文字，不会当作 HTML 执行 -->
+      {% if page.code_snippet and page.code_snippet != "" %}
+        <section class="work-extra">
+          <h2>CODE SNIPPET</h2>
+          <pre class="work-code"><code>{{ page.code_snippet | escape }}</code></pre>
+        </section>
+      {% endif %}
+      {% if page.code_files and page.code_files.size > 0 %}
+        <section class="work-extra">
+          <h2>SOURCE FILES</h2>
+          <ul class="work-downloads">
+            {% for asset in page.code_files %}
+              {% assign asset_name = asset | split: '/' | last %}
+              <li><a href="{{ asset | escape }}" download>{{ asset_name | escape }} ↓</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+      {% if page.repository_url and page.repository_url != "" %}
+        <section class="work-extra">
+          <h2>GITHUB REPOSITORY</h2>
+          <a class="work-link" href="{{ page.repository_url | escape }}" target="_blank" rel="noopener noreferrer">VIEW SOURCE ON GITHUB ↗</a>
+        </section>
+      {% endif %}
+    {% endif %}
+    <div class="article-bottom"><a href="{{ back_path | relative_url }}">{{ bottom_label }}</a></div>
   </main>
-  <footer class="journal-footer">
-    <p>© 2026 TOSAKA. All rights reserved.</p>
-  </footer>
-  <!-- 原有图片路径处理脚本，两个集合共用 -->
+  <footer class="journal-footer"><p>© 2026 TOSAKA. All rights reserved.</p></footer>
   <script src="{{ '/js/journal-images.js' | relative_url }}" defer></script>
 </body>
 </html>
