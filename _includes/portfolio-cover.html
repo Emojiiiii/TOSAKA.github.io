@@ -1,1 +1,31 @@
+{% assign entries = site.work
+  | where: "published", true
+  | where: "category", include.category
+  | sort: "date" | reverse %}
+
+{% assign cover_count = 0 %}
+
+<div class="card-image portfolio-cover-carousel" aria-hidden="true">
+  {% for entry in entries %}
+    {% if entry.cover and entry.cover != "" %}
+      {% assign cover_url = entry.cover %}
+      {% unless cover_url contains "://" or cover_url contains site.baseurl %}
+        {% assign cover_url = cover_url | relative_url %}
+      {% endunless %}
+
+      <img
+        class="portfolio-cover-slide{% if cover_count == 0 %} is-active{% endif %}"
+        src="{{ cover_url | escape }}"
+        alt=""
+        loading="lazy"
+      >
+
+      {% assign cover_count = cover_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if cover_count == 0 %}
+    <span>{{ include.placeholder }}</span>
+  {% endif %}
+</div>
 
