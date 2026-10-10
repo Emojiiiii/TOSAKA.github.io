@@ -78,6 +78,9 @@
   line-height: 1.8;
 
   color: var(--journal-muted);
+   
+/* 保留 CMS Description 中输入的换行 */
+  white-space: pre-line;
 }
 
 
