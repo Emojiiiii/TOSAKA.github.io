@@ -4,7 +4,7 @@ published: true
 date: 2026-10-09
 category: Development
 description: |-
-  记录 TOSAKA 个人作品集网站从零开始的设计与开发过程，包括视觉设计、交互体验、前端功能实现、内容管理系统搭建，以及开发过程中遇到的问题与解决方案。
+  记录个人作品集网站从零开始的设计与开发过程，包括视觉设计、交互体验、前端功能实现、内容管理系统搭建，以及开发过程中遇到的问题与解决方案。
   本文将随着网站持续迭代更新。
 cover: /TOSAKA.github.io/images/journal/post-01.jpg
 ---
