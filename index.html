@@ -106,7 +106,7 @@
 
     <!-- ========== 03 Featured Projects：精选作品 ==========
          section-header：标题区；card-grid：卡片布局容器。
-         article.card：单个独立作品条目，三张卡目前都是占位内容。
+         article.card：单个独立作品条目
     -->
     <!--
       第二屏：主要作品 + 个人优势
@@ -125,11 +125,15 @@
         <article class="card">
           <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
           <a class="portfolio-card-link" href="work/weapons/">
-          <div class="card-image placeholder">Project 01</div><!-- 未来可替换成 img 元素 -->
+            
+          {% include portfolio-cover.html
+             category="weapons"
+             placeholder="Project 01" %}
+            
           <div class="card-body">
             <h3>武器皮肤</h3>
             <p>
-              一些照葫芦画瓢的武器皮肤设计
+              一些突发奇想的武器皮肤设计
             </p>
           </div>
           </a>
@@ -139,11 +143,15 @@
         <article class="card">
           <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
           <a class="portfolio-card-link" href="work/analysis/">
-          <div class="card-image placeholder">Project 02</div>
+            
+          {% include portfolio-cover.html
+             category="analysis"
+             placeholder="Project 02" %}
+            
           <div class="card-body">
             <h3>游戏分析和心得</h3>
             <p>
-              一些游玩游戏后不成熟的看法和总结
+              一些游玩游戏后的看法和总结
             </p>
           </div>
           </a>
@@ -153,11 +161,15 @@
         <article class="card">
           <!-- 整张作品分类卡片可点击，访问对应的作品列表。 -->
           <a class="portfolio-card-link" href="work/code/">
-          <div class="card-image placeholder">Project 03</div>
+            
+          {% include portfolio-cover.html
+             category="code"
+             placeholder="Project 03" %}
+            
           <div class="card-body">
             <h3>代码相关</h3>
             <p>
-              上传一些曾经做过的作业和项目
+              一些曾经做过的作业和项目
             </p>
           </div>
           </a>
