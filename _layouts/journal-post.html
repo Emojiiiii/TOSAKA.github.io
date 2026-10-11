@@ -34,7 +34,8 @@ Journal 与 Portfolio 共用文章模板；作品才会显示多图、视频、�
     <a href="{{ '/' | relative_url }}" class="journal-logo">XINYUAN LIN<span class="logo-dot">.</span></a>
     <nav class="journal-nav" aria-label="Main navigation">
       {% if is_work %}
-        <a href="https://app.pagescms.org/"
+        <!-- 自动打开当前作品的 CMS 编辑页面 -->
+        <a href="https://app.pagescms.org/emojiiiii/tosaka.github.io/main/collection/work/edit/{{ page.relative_path | url_encode }}"
            target="_blank"
            rel="noopener noreferrer"
            class="journal-edit">EDIT</a>
