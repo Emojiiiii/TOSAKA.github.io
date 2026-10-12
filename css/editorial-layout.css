@@ -1,0 +1,575 @@
+/* ====================================================================
+   TOSAKA / EDITORIAL LAYOUT 2026
+   新版 Journal + Portfolio 通用排版
+   作为页面最后一张样式表加载。不修改首页，不影响 Pages CMS。
+
+   核心原则：
+   - 阅读用正文不盲目拉宽；让目录、图片、代码与视频使用宽屏空间。
+   - 文章使用编辑式分栏；分类列表使用不对称精选卡 + 常规双栏。
+   - <= 900px 恢复单栏；窄屏不使用固定宽度，不出现水平滚动条。
+   ==================================================================== */
+
+:root {
+  --editorial-accent: #d6a36b;
+  --editorial-line: rgba(234, 236, 239, .14);
+  --editorial-muted: #a4abb5;
+  --editorial-paper: #11151c;
+  --editorial-edge: clamp(22px, 5.5vw, 96px);
+}
+
+body {
+  background-image: radial-gradient(ellipse 42rem 28rem at 95% 5%, rgba(214,163,107,.035), transparent 75%);
+  background-repeat: no-repeat;
+}
+
+/* -------- 01 / Journal 首页 & 三个 Portfolio 分类列表 -------- */
+body .journal-main {
+  max-width: 1520px;
+  width: 100%;
+  padding: clamp(70px, 7vw, 116px) var(--editorial-edge) 130px;
+}
+
+body .journal-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(235px, .75fr);
+  grid-template-areas: "eyebrow eyebrow" "heading description";
+  align-items: end;
+  gap: 20px clamp(40px, 6vw, 110px);
+  margin-bottom: clamp(70px, 8vw, 126px);
+}
+
+.journal-intro .journal-label {
+  grid-area: eyebrow;
+  margin: 0;
+  color: var(--editorial-accent);
+}
+
+body .journal-intro h1 {
+  grid-area: heading;
+  margin: 0;
+  font-size: clamp(3.7rem, 7.3vw, 8.1rem);
+  line-height: 1.04;
+  letter-spacing: -.052em;
+  overflow-wrap: anywhere;
+}
+
+body .journal-intro .journal-description {
+  grid-area: description;
+  max-width: 430px;
+  margin: 0 0 6px;
+  padding: 4px 0 4px 24px;
+  border-left: 2px solid var(--editorial-accent);
+  font-size: clamp(.96rem, 1vw, 1.1rem);
+  line-height: 1.9;
+}
+
+body .journal-posts {
+  padding-top: 28px;
+  border-top-color: var(--editorial-line);
+}
+
+body .journal-section-heading {
+  margin-bottom: clamp(30px, 4vw, 54px);
+}
+
+body .journal-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(48px, 5vw, 76px) clamp(25px, 3vw, 48px);
+}
+
+body .journal-card-image {
+  aspect-ratio: 16 / 10;
+  background: #161a22;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+body .journal-card-image img {
+  object-fit: cover;
+}
+
+body .journal-card-content {
+  padding-top: 20px;
+}
+
+body .journal-card-meta {
+  color: var(--editorial-accent);
+  margin-bottom: 12px;
+}
+
+body .journal-card h3 {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.37;
+}
+
+body .journal-card-description {
+  max-width: 54ch;
+}
+
+/* 有封面的第一篇文章/第一件作品横跨两列，形成明确的首屏重点。
+   没有封面时维持普通卡片，避免出现巨大空白。 */
+@media (min-width: 1051px) {
+  body .journal-card:first-child:has(.journal-card-image img) {
+    grid-column: 1 / -1;
+    padding-bottom: clamp(32px, 4vw, 60px);
+    border-bottom: 1px solid var(--editorial-line);
+  }
+
+  body .journal-card:first-child:has(.journal-card-image img) .journal-card-clickable {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, .75fr);
+    align-items: center;
+    gap: clamp(32px, 5vw, 90px);
+  }
+
+  body .journal-card:first-child:has(.journal-card-image img) .journal-card-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  body .journal-card:first-child:has(.journal-card-image img) .journal-card-content {
+    padding-top: 0;
+  }
+
+  body .journal-card:first-child:has(.journal-card-image img) h3 {
+    font-size: clamp(2rem, 3.4vw, 3.8rem);
+    letter-spacing: -.035em;
+  }
+
+  /* 没有封面的首篇 Journal 也能获得醒目的文字精选版式。 */
+  body .journal-card:first-child:not(:has(.journal-card-image img)) {
+    grid-column: 1 / -1;
+    padding: 24px 0 58px;
+    border-bottom: 1px solid var(--editorial-line);
+  }
+  body .journal-card:first-child:not(:has(.journal-card-image img)) .journal-card-image {
+    display: none;
+  }
+  body .journal-card:first-child:not(:has(.journal-card-image img)) .journal-card-content {
+    max-width: 900px;
+    padding-top: 0;
+  }
+  body .journal-card:first-child:not(:has(.journal-card-image img)) h3 {
+    font-size: clamp(2.1rem, 3.7vw, 4.2rem);
+    letter-spacing: -.035em;
+  }
+}
+
+/* -------- 02 / Journal & Portfolio 共享详情页 -------- */
+body .article-main {
+  width: 100%;
+  max-width: 1520px;
+  padding: clamp(48px, 5vw, 80px) var(--editorial-edge) 120px;
+}
+
+body .article-back {
+  margin-bottom: clamp(60px, 7vw, 115px);
+  color: var(--editorial-muted);
+}
+
+body .article-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(220px, .75fr);
+  grid-template-areas: "meta subtitle" "title subtitle";
+  align-items: end;
+  gap: 22px clamp(34px, 5.5vw, 100px);
+  padding-bottom: clamp(40px, 5vw, 75px);
+  margin-bottom: clamp(40px, 5vw, 72px);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+body .article-header .article-meta {
+  grid-area: meta;
+  align-self: start;
+  margin: 0;
+  color: var(--editorial-accent);
+}
+
+body .article-header h1 {
+  grid-area: title;
+  margin: 0;
+  font-size: clamp(2.75rem, 5.3vw, 6rem);
+  line-height: 1.12;
+  letter-spacing: -.05em;
+  overflow-wrap: anywhere;
+}
+
+body .article-header .article-subtitle {
+  grid-area: subtitle;
+  max-width: 100%;
+  margin: 0 0 7px;
+  padding-left: 26px;
+  border-left: 2px solid var(--editorial-accent);
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+body .article-cover {
+  width: 100%;
+  margin: 0 0 clamp(72px, 7vw, 112px);
+  background: var(--editorial-paper);
+}
+
+body .article-cover img {
+  width: 100%;
+  height: auto;
+  max-height: 740px;
+  aspect-ratio: 1.9 / 1;
+  object-fit: cover;
+}
+
+/* 作品封面不能裁掉枪械设计与图中文字。 */
+body.editorial-work .article-cover img {
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* 目录通过 editorial-article.js 自动插入，若 JS 未载入则仍可正常阅读。 */
+.editorial-reading {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) minmax(0, 850px);
+  align-items: start;
+  gap: clamp(40px, 5vw, 90px);
+}
+
+.editorial-rail {
+  min-width: 0;
+  position: sticky;
+  top: 28px;
+  padding-top: 6px;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.editorial-rail-label {
+  padding-bottom: 16px;
+  margin: 0 0 18px;
+  border-bottom: 1px solid var(--editorial-line);
+  color: var(--editorial-accent);
+  font-size: .68rem;
+  letter-spacing: .17em;
+  font-weight: 700;
+}
+
+.editorial-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.editorial-toc a {
+  display: block;
+  padding: 10px 8px 10px 0;
+  color: #9299a6;
+  font-size: .77rem;
+  line-height: 1.7;
+  border-left: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease, padding-left .2s ease;
+}
+
+.editorial-toc a:hover,
+.editorial-toc a[aria-current="location"] {
+  color: #f5f7fa;
+  border-left-color: var(--editorial-accent);
+  padding-left: 12px;
+}
+
+/* 兼容无 JS、无标题的 Markdown 页面。 */
+body .article-content {
+  width: 100%;
+  max-width: 850px;
+  min-width: 0;
+}
+
+.editorial-reading .article-content {
+  margin: 0;
+}
+
+.editorial-reading.no-rail {
+  grid-template-columns: minmax(0, 850px);
+}
+
+.editorial-reading.no-rail .article-content {
+  margin: 0 auto;
+}
+
+body .article-content > p:not(:has(img)),
+body .article-content > ul,
+body .article-content > ol,
+body .article-content > blockquote {
+  max-width: 75ch;
+}
+
+body .article-content p {
+  font-size: clamp(1rem, 1.05vw, 1.09rem);
+  line-height: 1.88;
+  overflow-wrap: anywhere;
+}
+
+body .article-content h2 {
+  margin-top: clamp(64px, 6vw, 92px);
+  margin-bottom: 28px;
+  padding-top: 23px;
+  border-top: 1px solid var(--editorial-line);
+  font-size: clamp(1.65rem, 2.2vw, 2.2rem);
+  line-height: 1.4;
+  scroll-margin-top: 24px;
+}
+
+body .article-content h3 {
+  margin: 40px 0 20px;
+  font-size: clamp(1.2rem, 1.65vw, 1.55rem);
+  line-height: 1.5;
+}
+
+/* Markdown 原生列表也要有清楚的缩进和节奏。 */
+body .article-content ul,
+body .article-content ol {
+  padding-left: 1.65rem;
+  margin: 0 0 30px;
+  color: #c9ced8;
+  line-height: 1.86;
+}
+body .article-content li {
+  margin-bottom: 10px;
+}
+body .article-content li > ul,
+body .article-content li > ol {
+  margin-top: 10px;
+}
+body .article-content hr {
+  border: 0;
+  border-top: 1px solid var(--editorial-line);
+  margin: 55px 0;
+}
+
+body .article-content h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+body .article-content img,
+body .article-content video,
+body .article-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+body .article-content img {
+  object-fit: contain;
+  background: #141820;
+}
+
+body .article-content p:has(> img),
+body .article-content p:has(> a > img) {
+  max-width: none;
+}
+
+body .article-content blockquote {
+  padding: 26px 30px;
+  border-left: 3px solid var(--editorial-accent);
+  background: rgba(214,163,107,.055);
+  font-style: normal;
+}
+
+body .article-content pre {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 20px 24px;
+  border: 1px solid var(--editorial-line);
+  background: #111722;
+  line-height: 1.65;
+  white-space: pre;
+}
+
+body .article-content code,
+body .work-code code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+body .article-content :not(pre) > code {
+  padding: 2px 6px;
+  background: rgba(255,255,255,.065);
+  border-radius: 3px;
+  overflow-wrap: anywhere;
+}
+
+body .article-content table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* -------- 03 / 作品图库、视频、代码扩展成宽幅展示 -------- */
+body .work-extra {
+  max-width: none;
+  width: 100%;
+  margin: clamp(76px, 7vw, 110px) 0 0;
+}
+
+body .work-extra h2 {
+  padding-bottom: 18px;
+  margin-bottom: 32px;
+  color: var(--editorial-accent);
+  font-size: .78rem;
+  letter-spacing: .16em;
+}
+
+body .work-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 24px);
+}
+
+body .work-gallery > a {
+  grid-column: span 6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  background: #151922;
+  border: 1px solid var(--editorial-line);
+}
+
+body .work-gallery > a:first-child { grid-column: span 7; }
+body .work-gallery > a:nth-child(2) { grid-column: span 5; }
+body .work-gallery > a:last-child:nth-child(odd) { grid-column: span 12; }
+
+body .work-gallery img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+}
+
+body .work-videos {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 470px), 1fr));
+  gap: 24px;
+}
+
+body .work-videos video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+body .work-code {
+  padding: 26px;
+  border-color: var(--editorial-line);
+}
+
+body .article-bottom {
+  width: 100%;
+  max-width: none;
+  margin: clamp(85px, 8vw, 140px) 0 0;
+  border-top-color: var(--editorial-line);
+}
+
+/* -------- 04 / 平板与手机：回到单栏，避免阅读过窄 -------- */
+@media (max-width: 1050px) {
+  body .journal-intro,
+  body .article-header {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, .85fr);
+    column-gap: 32px;
+  }
+
+  .editorial-reading {
+    grid-template-columns: minmax(140px, 170px) minmax(0, 1fr);
+    gap: 34px;
+  }
+}
+
+@media (max-width: 900px) {
+  body .journal-main,
+  body .article-main {
+    padding-left: clamp(20px, 5vw, 42px);
+    padding-right: clamp(20px, 5vw, 42px);
+  }
+
+  body .journal-intro {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "eyebrow" "heading" "description";
+    gap: 20px;
+    margin-bottom: 64px;
+  }
+
+  body .journal-intro h1 {
+    font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  body .journal-intro .journal-description {
+    max-width: 560px;
+    margin-top: 8px;
+  }
+
+  body .article-header {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "meta" "title" "subtitle";
+    gap: 18px;
+  }
+
+  body .article-header h1 {
+    font-size: clamp(2.35rem, 6.5vw, 4.5rem);
+  }
+
+  body .article-header .article-subtitle {
+    margin-top: 15px;
+  }
+
+  .editorial-reading,
+  .editorial-reading.no-rail {
+    display: block;
+  }
+
+  .editorial-rail {
+    display: none;
+  }
+
+  .editorial-reading .article-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  body .journal-main {
+    padding-top: 66px;
+    padding-bottom: 90px;
+  }
+
+  body .journal-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 50px;
+  }
+
+  body .journal-card h3 {
+    font-size: 1.38rem;
+  }
+
+  body .article-main {
+    padding-top: 48px;
+    padding-bottom: 88px;
+  }
+
+  body .article-back { margin-bottom: 58px; }
+  body .article-header h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
+  body .article-cover { margin-bottom: 60px; }
+  body .article-cover img { aspect-ratio: auto; }
+  body .article-content p { font-size: 1rem; line-height: 1.83; }
+  body .article-content blockquote { padding: 20px; }
+  body .article-content pre { padding: 16px; }
+  body .article-content th,
+  body .article-content td { padding: 10px 12px; }
+
+  body .work-gallery > a,
+  body .work-gallery > a:first-child,
+  body .work-gallery > a:nth-child(2),
+  body .work-gallery > a:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  body .work-gallery img { aspect-ratio: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editorial-toc a { transition: none; }
+}
