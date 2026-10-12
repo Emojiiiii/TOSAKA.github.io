@@ -28,6 +28,8 @@ Journal 与 Portfolio 共用文章模板；作品才会显示多图、视频、�
   {% if is_work %}
     <link rel="stylesheet" href="{{ '/css/work-content.css' | relative_url }}">
   {% endif %}
+  <!-- Journal + Work 详情页共享排版 -->
+  <link rel="stylesheet" href="{{ '/css/editorial-layout.css' | relative_url }}">
 </head>
 <body data-baseurl="{{ site.baseurl | default: '' }}">
   <header class="journal-header">
@@ -126,6 +128,7 @@ Journal 与 Portfolio 共用文章模板；作品才会显示多图、视频、�
   </main>
   <footer class="journal-footer"><p>© 2026 TOSAKA. All rights reserved.</p></footer>
   <script src="{{ '/js/journal-images.js' | relative_url }}" defer></script>
+  <script src="{{ '/js/editorial-article.js' | relative_url }}" defer></script>
   {% if is_work %}
 
   <div id="contact-modal"
