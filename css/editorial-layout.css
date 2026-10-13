@@ -573,3 +573,44 @@ body .article-bottom {
 @media (prefers-reduced-motion: reduce) {
   .editorial-toc a { transition: none; }
 }
+
+
+/* ==========================================
+   TOSAKA - 正文超链接颜色
+   Journal / Work 共用
+========================================== */
+
+/* 01. 默认超链接 */
+body .article-content a[href]:not(:has(img)),
+body .work-extra a.work-link,
+body .work-downloads a {
+  color: #8FB8FF;
+  text-decoration: underline;
+  text-decoration-color: rgba(143, 184, 255, 0.55);
+  text-underline-offset: 4px;
+
+  transition: color 0.2s ease,
+              text-decoration-color 0.2s ease;
+}
+
+/* 02. 已经访问过的链接 */
+body .article-content a[href]:not(:has(img)):visited,
+body .work-extra a.work-link:visited,
+body .work-downloads a:visited {
+  color: #BCA5E8;
+}
+
+/* 03. 鼠标悬停 */
+body .article-content a[href]:not(:has(img)):hover,
+body .work-extra a.work-link:hover,
+body .work-downloads a:hover {
+  color: #D6A36B;
+  text-decoration-color: currentColor;
+}
+
+/* 04. 键盘选中链接 */
+body .article-content a[href]:focus-visible,
+body .work-extra a:focus-visible {
+  outline: 2px solid #D6A36B;
+  outline-offset: 4px;
+}
