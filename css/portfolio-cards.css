@@ -1,4 +1,4 @@
-/* Portfolio: 保留现有 .card 的全部排版，仅添加整卡可点击功能。 */
+/* Portfolio：保持原有卡片文字、图片布局和整卡可点击。 */
 .portfolio-card-link {
   display: block;
   height: 100%;
@@ -6,17 +6,17 @@
   text-decoration: none;
 }
 
-/* 方便键盘用户通过 Tab 找到作品分类入口。 */
 .portfolio-card-link:focus-visible {
   outline: 2px solid #D6A36B;
   outline-offset: -4px;
   border-radius: 12px;
 }
 
-/* 首页 Portfolio 封面自动轮播 */
+/* 轮播封面：沿用原有卡片高度，图片淡入淡出。 */
 .portfolio-cover-carousel {
   position: relative;
   overflow: hidden;
+  touch-action: pan-y; /* 手机可以上下滚动，左右手势由 JS 处理 */
 }
 
 .portfolio-cover-slide {
@@ -33,8 +33,77 @@
   opacity: 1;
 }
 
+/* 卡片和箭头：共用一套封面高度，保证箭头处于图片垂直中央。 */
+.card-grid .card {
+  position: relative;
+}
+
+.combined-page .card {
+  --portfolio-cover-height: clamp(110px, 14vh, 190px);
+}
+
+.combined-page .card-image {
+  height: var(--portfolio-cover-height);
+}
+
+.portfolio-cover-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--portfolio-cover-height, 220px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  z-index: 2;
+  pointer-events: none; /* 只有两个箭头可点击，其余区域仍属于原链接 */
+}
+
+.portfolio-cover-arrow {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(10, 14, 20, 0.66);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.portfolio-cover-arrow:hover,
+.portfolio-cover-arrow:focus-visible {
+  background: rgba(10, 14, 20, 0.92);
+  border-color: #D6A36B;
+}
+
+.portfolio-cover-arrow:focus-visible {
+  outline: 2px solid #D6A36B;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .combined-page .card {
+    --portfolio-cover-height: 170px;
+  }
+
+  .portfolio-cover-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .portfolio-cover-slide {
+  .portfolio-cover-slide,
+  .portfolio-cover-arrow {
     transition: none;
   }
 }
