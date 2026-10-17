@@ -161,3 +161,47 @@ content:
         label: External Video URL
         type: string
         description: "大视频建议上传到 YouTube 等平台，填写视频链接。"
+
+      # ==========================================
+      # About Q&A - 问答管理
+      # ==========================================
+      - name: qa
+        label: About Q&A
+        type: collection
+    
+        # 问答内容存储位置
+        path: _qa
+        format: yaml-frontmatter
+    
+        filename:
+          template: "{year}-{month}-{day}-{hour}{minute}{second}.md"
+          field: false
+    
+        view:
+          fields: [question, date, published]
+          primary: question
+    
+        fields:
+          # 访客提出的问题
+          - name: question
+            label: Question
+            type: text
+            required: true
+    
+          # 由你本人填写回答
+          - name: answer
+            label: Your Answer
+            type: text
+            required: false
+    
+          # 问答日期
+          - name: date
+            label: Date
+            type: date
+            required: true
+    
+          # 是否公开发布
+          - name: published
+            label: Published
+            type: boolean
+            default: false
