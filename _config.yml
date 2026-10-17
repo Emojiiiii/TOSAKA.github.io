@@ -39,5 +39,9 @@ defaults:
 # =====================================
 # About Q&A - 访客提问接收地址
 # =====================================
+# Q&A API 接收地址
+qa_form_endpoint: "https://tosaka-qa-api.lin-xinyuan.workers.dev/questions"
 
-qa_form_endpoint: ""
+# Cloudflare Turnstile 公开 Site Key
+qa_turnstile_site_key: "0x4AAAAAAFY-2IQgOMVtRDbc"
+
