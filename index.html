@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="css/navigation.css" />
   <!-- Portfolio 三张卡片的整卡点击与键盘焦点 -->
   <link rel="stylesheet" href="css/portfolio-cards.css" />
+  <!-- About 双栏布局与 Q&A 独立样式 -->
+  <link rel="stylesheet" href="css/about-qa.css" />
 </head>
 <body>
   <!-- ========== 01 顶部导航栏（Navigation）==========
@@ -220,7 +222,10 @@
     <h2>关于我</h2>
   </div>
 
-  <!-- 个人介绍正文 -->
+  <!-- About 左右双栏容器 -->
+  <div class="about-layout">
+  
+  <!-- 左侧：原有个人介绍 -->
   <div class="about-box">
 
     <!-- 第一部分：个人背景 -->
@@ -272,6 +277,13 @@
     </p>
 
   </div>
+  <!-- 左侧个人介绍结束 -->
+
+  <!-- 右侧：Q&A 问答区 -->
+  {% include about-qa.html %}
+
+</div>
+<!-- About 双栏结束 -->
 
 </section>
 <!-- ========== About 结束 ========== -->
@@ -370,6 +382,9 @@
 
   <!-- Portfolio 分类封面自动轮播 -->
   <script src="js/portfolio-slideshow.js" defer></script>
+
+  <!-- About Q&A：访客问题提交 -->
+  <script src="js/about-qa.js" defer></script>
 
 </body>
 </html>
