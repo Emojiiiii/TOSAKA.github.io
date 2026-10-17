@@ -12,9 +12,14 @@ collections:
   article:
     output: true
     permalink: /journal/entries/:name/
+
   work:
     output: true
     permalink: /work/projects/:name/
+
+  # About Q&A 集合
+  qa:
+    output: false
 
 theme: null
 
