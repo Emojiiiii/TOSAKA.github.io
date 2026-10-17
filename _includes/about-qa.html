@@ -1,0 +1,54 @@
+{% comment %}
+  TOSAKA / About Q&A
+  访客提交到外部 Formspree，不自动写入公开仓库。
+  仅渲染 Pages CMS 中 published=true 且 answer 非空的问题。
+{% endcomment %}
+<aside class="qa-panel" aria-labelledby="qa-heading">
+  <div class="qa-heading">
+    <p class="qa-kicker">02 / QUESTIONS &amp; ANSWERS</p>
+    <h2 id="qa-heading">Q&amp;A<span class="qa-accent">.</span></h2>
+    <p class="qa-description">关于游戏设计、个人作品，或任何你感兴趣的话题，都欢迎提问。</p>
+  </div>
+
+  <div class="qa-feed" aria-label="已公开的问答">
+    {% assign visible_qa = site.qa | where: "published", true | sort: "date" | reverse %}
+    {% assign visible_count = 0 %}
+    {% for entry in visible_qa %}
+      {% assign clean_answer = entry.answer | default: "" | strip %}
+      {% if clean_answer != "" and entry.question and entry.question != "" %}
+        {% assign visible_count = visible_count | plus: 1 %}
+        <article class="qa-entry">
+          <div class="qa-entry-meta">
+            <span>Q{{ visible_count }}</span>
+            {% if entry.date %}
+              <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time>
+            {% endif %}
+          </div>
+          <h3>{{ entry.question | escape }}</h3>
+          <p class="qa-answer">{{ entry.answer | escape | newline_to_br }}</p>
+        </article>
+      {% endif %}
+    {% endfor %}
+    {% if visible_count == 0 %}
+      <p class="qa-empty">目前还没有公开的问答。欢迎留下第一个问题。</p>
+    {% endif %}
+  </div>
+
+  <div class="qa-ask">
+    <p class="qa-ask-label">ASK A QUESTION / 向我提问</p>
+    {% assign qa_endpoint = site.qa_form_endpoint | default: "" %}
+    {% if qa_endpoint contains "https://formspree.io/f/" %}
+      <form id="qa-form" action="{{ qa_endpoint | escape }}" method="POST">
+        <label for="qa-question">你的问题</label>
+        <textarea id="qa-question" name="question" rows="4" minlength="5" maxlength="500" required placeholder="写下你想问的问题……"></textarea>
+        <div class="qa-form-footer">
+          <small>匿名提交。问题不会自动公开，也不保证每条都会得到回复。</small>
+          <button type="submit" class="qa-submit">提交问题 <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="qa-form-status" class="qa-form-status" role="status" aria-live="polite"></p>
+      </form>
+    {% else %}
+      <p class="qa-not-configured">访客提问功能正在配置中。公开问答仍可正常显示。</p>
+    {% endif %}
+  </div>
+</aside>
