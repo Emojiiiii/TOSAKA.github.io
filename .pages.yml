@@ -162,12 +162,12 @@ content:
         type: string
         description: "大视频建议上传到 YouTube 等平台，填写视频链接。"
 
-# ==========================================
-# About Q&A - 问答管理
-# ==========================================
-- name: qa
-  label: About Q&A
-  type: collection
+  # ==========================================
+  # About Q&A - 问答管理
+  # ==========================================
+  - name: qa
+    label: About Q&A
+    type: collection
 
   # 问答内容存储位置
   path: _qa
