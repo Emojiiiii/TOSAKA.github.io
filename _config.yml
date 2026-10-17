@@ -35,3 +35,9 @@ defaults:
       type: "work"
     values:
       layout: "journal-post"
+
+# =====================================
+# About Q&A - 访客提问接收地址
+# =====================================
+
+qa_form_endpoint: ""
