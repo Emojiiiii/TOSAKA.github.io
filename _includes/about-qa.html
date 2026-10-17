@@ -34,21 +34,69 @@
     {% endif %}
   </div>
 
+  
+  <!-- 访客匿名提问 -->
   <div class="qa-ask">
-    <p class="qa-ask-label">ASK A QUESTION / 向我提问</p>
+    <p class="qa-ask-label">
+      ASK A QUESTION / 向我提问
+    </p>
+
     {% assign qa_endpoint = site.qa_form_endpoint | default: "" %}
-    {% if qa_endpoint contains "https://formspree.io/f/" %}
-      <form id="qa-form" action="{{ qa_endpoint | escape }}" method="POST">
+    {% assign qa_site_key = site.qa_turnstile_site_key | default: "" %}
+
+    {% if qa_endpoint != "" and qa_site_key != "" %}
+
+      <form
+        id="qa-form"
+        action="{{ qa_endpoint | escape }}"
+        method="POST"
+      >
         <label for="qa-question">你的问题</label>
-        <textarea id="qa-question" name="question" rows="4" minlength="5" maxlength="500" required placeholder="写下你想问的问题……"></textarea>
+
+        <textarea
+          id="qa-question"
+          name="question"
+          rows="4"
+          minlength="5"
+          maxlength="500"
+          required
+          placeholder="写下你想问的问题……"
+        ></textarea>
+
+        <!-- Cloudflare 人机验证 -->
+        <div
+          class="cf-turnstile"
+          data-sitekey="{{ qa_site_key | escape }}"
+          data-theme="dark"
+        ></div>
+
         <div class="qa-form-footer">
-          <small>匿名提交。问题不会自动公开，也不保证每条都会得到回复。</small>
-          <button type="submit" class="qa-submit">提交问题 <span aria-hidden="true">↗</span></button>
+          <small>
+            匿名提交。问题不会自动公开，
+            我会选择部分问题进行回答。
+          </small>
+
+          <button
+            type="submit"
+            class="qa-submit"
+          >
+            提交问题 ↗
+          </button>
         </div>
-        <p id="qa-form-status" class="qa-form-status" role="status" aria-live="polite"></p>
+
+        <p
+          id="qa-form-status"
+          class="qa-form-status"
+          role="status"
+          aria-live="polite"
+        ></p>
       </form>
+
     {% else %}
-      <p class="qa-not-configured">访客提问功能正在配置中。公开问答仍可正常显示。</p>
+      <p class="qa-not-configured">
+        提问功能正在配置中。
+      </p>
     {% endif %}
   </div>
 </aside>
+
