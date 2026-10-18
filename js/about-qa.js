@@ -103,3 +103,153 @@
     }
   });
 })();
+
+
+/* ==================================================
+   TOSAKA / 公开 Q&A 自动加载
+   从 Cloudflare D1 获取已经发布的问答
+   ================================================== */
+
+(() => {
+  "use strict";
+
+  const feed = document.getElementById("qa-public-feed");
+  if (!feed) return;
+
+  const API_URL =
+    "https://tosaka-qa-api.lin-xinyuan.workers.dev/public/questions";
+
+  // 创建安全的文本元素，避免 HTML 注入
+  function makeElement(tag, className, content) {
+    const element = document.createElement(tag);
+
+    if (className) {
+      element.className = className;
+    }
+
+    element.textContent = content ?? "";
+    return element;
+  }
+
+  // 将数据库时间转换为 YYYY.MM.DD
+  function formatDate(value) {
+    if (typeof value !== "string") return "";
+
+    const match = value.match(
+      /^(\d{4})-(\d{2})-(\d{2})/
+    );
+
+    if (!match) return "";
+
+    return `${match[1]}.${match[2]}.${match[3]}`;
+  }
+
+  // 创建一条公开问答
+  function createQuestion(item, index) {
+    const article = document.createElement("article");
+    article.className = "qa-entry";
+
+    const meta = document.createElement("div");
+    meta.className = "qa-entry-meta";
+
+    const number = makeElement(
+      "span",
+      "",
+      `Q${String(index + 1).padStart(2, "0")}`
+    );
+
+    const time = document.createElement("time");
+    const date = formatDate(item.published_at);
+
+    time.textContent = date;
+
+    if (date) {
+      time.dateTime = date.replace(/\./g, "-");
+    }
+
+    meta.append(number, time);
+
+    const question = makeElement(
+      "h3",
+      "",
+      item.question
+    );
+
+    const answer = makeElement(
+      "p",
+      "qa-answer",
+      item.answer
+    );
+
+    // 保留回答中的手动换行
+    answer.style.whiteSpace = "pre-line";
+
+    article.append(meta, question, answer);
+
+    return article;
+  }
+
+  async function loadPublicQuestions() {
+    try {
+      const response = await fetch(API_URL, {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
+
+      const data = await response.json();
+
+      if (
+        !data.success ||
+        !Array.isArray(data.questions)
+      ) {
+        throw new Error("Invalid API response");
+      }
+
+      // 只显示包含完整问题与答案的记录
+      const questions = data.questions.filter(item =>
+        typeof item.question === "string" &&
+        typeof item.answer === "string" &&
+        item.question.trim() &&
+        item.answer.trim()
+      );
+
+      feed.replaceChildren();
+
+      if (questions.length === 0) {
+        feed.appendChild(
+          makeElement(
+            "p",
+            "qa-empty",
+            "目前还没有公开的问答，欢迎留下第一个问题。"
+          )
+        );
+        return;
+      }
+
+      questions.forEach((item, index) => {
+        feed.appendChild(createQuestion(item, index));
+      });
+
+    } catch (error) {
+      console.error("Q&A loading failed:", error);
+
+      feed.replaceChildren(
+        makeElement(
+          "p",
+          "qa-empty",
+          "问答暂时无法加载，请稍后重试。"
+        )
+      );
+    }
+  }
+
+  loadPublicQuestions();
+})();
+
