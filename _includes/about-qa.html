@@ -11,28 +11,20 @@
   </div>
 
   <div class="qa-feed" aria-label="已公开的问答">
-    {% assign visible_qa = site.qa | where: "published", true | sort: "date" | reverse %}
-    {% assign visible_count = 0 %}
-    {% for entry in visible_qa %}
-      {% assign clean_answer = entry.answer | default: "" | strip %}
-      {% if clean_answer != "" and entry.question and entry.question != "" %}
-        {% assign visible_count = visible_count | plus: 1 %}
-        <article class="qa-entry">
-          <div class="qa-entry-meta">
-            <span>Q{{ visible_count }}</span>
-            {% if entry.date %}
-              <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time>
-            {% endif %}
-          </div>
-          <h3>{{ entry.question | escape }}</h3>
-          <p class="qa-answer">{{ entry.answer | escape | newline_to_br }}</p>
-        </article>
-      {% endif %}
-    {% endfor %}
     {% if visible_count == 0 %}
       <p class="qa-empty">目前还没有公开的问答。欢迎留下第一个问题。</p>
     {% endif %}
-  </div>
+    <!-- 已公开的问答：自动从 Cloudflare D1 加载 -->
+    <div
+      class="qa-feed"
+      id="qa-public-feed"
+      aria-label="已公开的问答"
+      aria-live="polite"
+    >
+  <p class="qa-empty">
+    正在加载公开问答……
+  </p>
+</div>
 
   
   <!-- 访客匿名提问 -->
